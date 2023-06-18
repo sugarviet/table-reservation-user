@@ -1,7 +1,9 @@
 .tableTitle{
     color: #ffffff;
+    font-family: "Roboto",sans-serif;
 }
 .tableTable{
+    font-family: "Roboto",sans-serif;
     background-color: #ffffff;
     color: #19912b;
     border-radius: 0.5rem;
@@ -13,6 +15,18 @@
     margin: 3.25rem auto 0;
     max-width: 900px;
 }
-.tableTableTime{
-    
+.checkboxButton {
+    display: inline-block;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    background-color: #fff;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 14px;
+    padding: 6px 12px;
+}
+.tableTableBtn{
+    width: 100px;
+    height: 40px;
+    margin-top: 18px;
+    margin-right: 20px;
 }
