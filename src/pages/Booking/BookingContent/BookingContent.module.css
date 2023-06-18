@@ -1,0 +1,45 @@
+.bookingContent{
+    font-family: "Roboto",sans-serif;
+    background-color: #ffffff;
+    color: #19912b;
+    border-radius: 0.5rem;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin: 3.25rem auto 0;
+    max-width: 900px;
+    padding: 10px 10px;
+    padding-top: 15px;
+}
+.bookingDetail{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
+}
+.bookingContent1{
+    font-family: "Roboto",sans-serif;
+    background-color: #ffffff;
+    color: #19912b;
+    border-radius: 0.5rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin: 1.25rem auto 0;
+    max-width: 900px;
+    padding: 10px 10px;
+}
+.bookingBook{
+    width: 880px;
+}
+.bookingBook1{
+    width: 110px;
+    height: 40px;
+    background-color: #009cde;
+}
+.bookingBook1:hover{
+    background-color: #057cb0 !important;
+}

@@ -97,7 +97,12 @@ const HomeContent = () => {
           </div>
         </Form>
       </div>
-    
+      <div className={styles.homeInfor}>
+        <h1>Find table for you</h1>
+        <p style={{fontSize:'20px',marginTop:'10px'}}>Given your specific preferences, we will make recommendations to suit your requirements</p>
+        <h1 style={{marginTop:'10px'}}> Or</h1>
+        <h1 style={{marginTop:'10px'}}>Call us : 098123320</h1>
+      </div>
      <HomeTable/>
     </div>
   )
