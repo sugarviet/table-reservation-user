@@ -1,0 +1,8 @@
+.HomeContent{
+    background-image: url('https://booking.pizza4ps.com/static/media/bg.38c61b45.jpg');
+    height: 100%;
+    min-height: 110vh;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
