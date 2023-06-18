@@ -1,0 +1,28 @@
+.container {
+  padding: 10rem;
+  display: flex;
+  justify-content: center;
+}
+
+.signInForm {
+    padding: 20px 60px;
+}
+
+.loginForgot {
+  float: right;
+}
+
+.formButton {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  width: 100%;
+  min-height: 37px;
+  border: 0;
+  padding: 5px;
+  color: #ffffff;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}

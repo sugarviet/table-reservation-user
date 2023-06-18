@@ -1,0 +1,69 @@
+.homeContent{
+    text-align: center;
+}
+.homeHeader{
+    padding-top: 150px;
+    color: #ffffff;
+    font-size: 45px;
+}
+.homeDes{
+    color: #ffffff;
+    margin-top: 30px;
+    font-size:25px;
+}
+.homeSearch{
+    background-color: #ffffff;
+    
+    border-radius: 0.5rem;
+    text-align: left;
+    display: flex;
+    width: 100%;
+    margin: 3.25rem auto 0;
+    max-width: 1018px;
+}
+.homeForm{
+    display: flex;
+    width: 100%;
+}
+.homeGroup{
+    color: #19912b;
+    padding: 0 0 0 15px;
+    flex-wrap: wrap;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    font-family: "HelveticaNeue";
+}
+.homeChoose{
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
+    padding: 0 10px;
+    padding-top: 8px;
+    border-right: 1px solid #ddd6c5;
+}
+.homeChoose1{
+    display: flex;
+    flex: 1 1;
+    flex-direction: row;
+    padding: 0 30px;
+}
+.homeBtn{
+    background-color: #19912b;
+    width: 200px;
+    height: 90px;
+    border-radius: 0 8px 8px 0;
+}
+.homeSearchTxt{
+    color: #ffffff;
+    font-size: 18px;
+    padding-left: 10px;
+}
+.homeTitleChoose{
+    padding-left: 10px;
+    font-size: 16px;
+}
+.homeInfor{
+    color: #ffffff;
+    margin-top: 100px;
+}

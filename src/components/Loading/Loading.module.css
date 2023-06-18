@@ -1,0 +1,8 @@
+.loading{
+    
+    width: 200px;
+}
+.centeredGif {
+    display: flex;
+    justify-content: center;
+  }
