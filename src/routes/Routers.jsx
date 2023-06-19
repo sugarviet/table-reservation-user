@@ -6,11 +6,11 @@ import Booking from "../pages/Booking/Booking";
 const Routers = () => {
   return (
     <Routes>
-        <Route path="/login" element={<SignIn />}/>
-        <Route path="/signup" element={<SignUp />}/>
-        <Route path="/" element={<Home />}/>
-        <Route path="/booking" element={<Booking />}/>
+      <Route path="/login" element={<SignIn />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/booking" element={<Booking />} />
     </Routes>
-  )
-}
-export default Routers
+  );
+};
+export default Routers;
