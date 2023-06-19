@@ -1,19 +1,16 @@
-import { Layout, Button, Input, Tooltip } from "antd";
+import { Button, Input, Layout, Tooltip } from "antd";
 import { Link } from "react-router-dom";
 import logo from '../../assets/logo.png';
 
 import {
-  SearchOutlined,
-  UserOutlined,
-  ShoppingCartOutlined,
-  MenuOutlined,
   CloseOutlined,
+  MenuOutlined
 } from "@ant-design/icons";
 
 import styles from "./Navbar.module.css";
 
-import useNavbar from "./hooks/useNavbar";
 import Drawer from "./components/Drawer";
+import useNavbar from "./hooks/useNavbar";
 
 const { Header } = Layout;
 const { Search } = Input;

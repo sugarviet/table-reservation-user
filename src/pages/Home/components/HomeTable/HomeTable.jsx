@@ -1,7 +1,7 @@
-import styles from './HomeTable.module.css';
-import { Checkbox, Modal, Button } from 'antd';
+import { Button, Checkbox, Modal } from 'antd';
 import { useState } from 'react';
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import styles from './HomeTable.module.css';
 const HomeTable = () => {
     const timeOptions = ['8:00 AM', '10:00 PM', '12:00 PM'];
     const navigate = useNavigate();
