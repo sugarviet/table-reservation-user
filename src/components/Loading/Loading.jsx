@@ -1,10 +1,9 @@
 import styles from './Loading.module.css'
-import loading from '../../assets/loading.gif'
-
+import table from '../../assets/table.png'
 const Loading = () => {
   return (
     <div className={styles.centeredGif}>
-      <img className={styles.loading} src={loading}></img>
+      <img className={styles.table} src={table} />
     </div>
   )
 }

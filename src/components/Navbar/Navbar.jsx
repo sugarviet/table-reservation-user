@@ -6,9 +6,7 @@ import {
   CloseOutlined,
   MenuOutlined
 } from "@ant-design/icons";
-
 import styles from "./Navbar.module.css";
-
 import Drawer from "./components/Drawer";
 import useNavbar from "./hooks/useNavbar";
 
@@ -16,6 +14,7 @@ const { Header } = Layout;
 const { Search } = Input;
 
 const Navbar = () => {
+
   const items = [
     {
       label: <Link to='/profile'>My Profile</Link>,

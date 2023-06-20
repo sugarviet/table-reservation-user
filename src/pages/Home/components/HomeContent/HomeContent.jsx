@@ -10,13 +10,12 @@ import EmptyData from '../../../../components/EmptyData/EmptyData'
 
 const HomeContent = () => {
   onFinish;
-  const [data, setData] = useState();
+  const [data, setData] = useState(null);
   const [capacity, setCapacity] = useState(0);
   const [timeRangeType, setTimeRangeType] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   // const API_URL = "http://localhost:7070";
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  const scrollRef = useRef(null);
 
   // const api = axios.create({
   //   baseURL: API_URL,
@@ -26,7 +25,6 @@ const HomeContent = () => {
     try {
       setIsFormSubmitted(true);
       setIsLoading(true);
-
       let api = `http://localhost:7070/table/search?`;
       if (capacity !== 0) {
         api += `capacity=${capacity}&`;
@@ -35,15 +33,11 @@ const HomeContent = () => {
       if (timeRangeType !== "") {
         api += `timeRangeType=${timeRangeType}`;
       }
-
       const response = await axios.get(api);
-
-      setData(response.listTable);
-
+      setData(response.data.listTable);
+      console.log(response.data.listTable);
       setIsLoading(false);
-      if (nodataRef.current) {
-        nodataRef.current.scrollIntoView({ behavior: 'smooth' });
-      }
+
     } catch (error) {
       console.error(error);
       setIsLoading(false);
@@ -61,9 +55,10 @@ const HomeContent = () => {
               <Form.Item>
                 <Space wrap>
                   <Select
-                    defaultValue="0"
+                    value={undefined}
+                    placeholder="Select capacity "
                     style={{
-                      width: 120,
+                      width: 140,
                     }}
                     bordered={false}
                     options={[
@@ -102,8 +97,9 @@ const HomeContent = () => {
                 <Space wrap>
                   <Select
                     // mode="multiple"
-                    defaultValue=""
-                    style={{ width: 120 }}
+                    value={undefined}
+                    placeholder="Select time range"
+                    style={{ width: 150 }}
                     bordered={false}
                     options={[
                       {
@@ -158,11 +154,11 @@ const HomeContent = () => {
         <h1 style={{ marginTop: "10px" }}>Call us : 098123320</h1>
       </div>
       {isLoading ? (
-        <Loading />
+          <Loading />
       ) : (
         isFormSubmitted ? (
-          <div ref={scrollRef}>
-            {data ? (
+          <div>
+            {data != null ? (
               <HomeTable data={data} />
             ) : (
               <EmptyData style={{ marginTop: '50px' }} />
