@@ -1,12 +1,12 @@
-import styles from "./HomeContent.module.css";
-import { Select, Form, DatePicker, Space, Button } from "antd";
-import Search from "../../../../assets/search.png";
-import HomeTable from "../HomeTable/HomeTable";
-import { onFinish } from "../../components/hooks/useSearchTable";
-import { useRef, useState } from "react";
+import { Button, DatePicker, Form, Select, Space } from "antd";
 import axios from "axios";
-import Loading from '../../../../components/Loading/Loading'
-import EmptyData from '../../../../components/EmptyData/EmptyData'
+import { useState } from "react";
+import Search from "../../../../assets/search.png";
+import EmptyData from "../../../../components/EmptyData/EmptyData";
+import Loading from "../../../../components/Loading/Loading";
+import { onFinish } from "../../components/hooks/useSearchTable";
+import HomeTable from "../HomeTable/HomeTable";
+import styles from "./HomeContent.module.css";
 
 const HomeContent = () => {
   onFinish;
@@ -14,13 +14,8 @@ const HomeContent = () => {
   const [capacity, setCapacity] = useState(0);
   const [timeRangeType, setTimeRangeType] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  // const API_URL = "http://localhost:7070";
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
-  // const api = axios.create({
-  //   baseURL: API_URL,
-  //   withCredentials: true,
-  // });
   const handleFormSubmit = async () => {
     try {
       setIsFormSubmitted(true);
@@ -37,7 +32,6 @@ const HomeContent = () => {
       setData(response.data.listTable);
       console.log(response.data.listTable);
       setIsLoading(false);
-
     } catch (error) {
       console.error(error);
       setIsLoading(false);
@@ -154,20 +148,16 @@ const HomeContent = () => {
         <h1 style={{ marginTop: "10px" }}>Call us : 098123320</h1>
       </div>
       {isLoading ? (
-          <Loading />
-      ) : (
-        isFormSubmitted ? (
-          <div>
-            {data != null ? (
-              <HomeTable data={data} />
-            ) : (
-              <EmptyData style={{ marginTop: '50px' }} />
-
-            )}
-          </div>
-        ) : null
-      )}
-
+        <Loading />
+      ) : isFormSubmitted ? (
+        <div>
+          {data != null ? (
+            <HomeTable data={data} />
+          ) : (
+            <EmptyData style={{ marginTop: "50px" }} />
+          )}
+        </div>
+      ) : null}
     </div>
   );
 };
