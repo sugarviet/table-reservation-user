@@ -1,9 +1,17 @@
-import axios from 'axios';
-import { API_RESERVATION } from './api_path';
+import axios from "axios";
+import { API_RESERVATION } from "./api_path";
 
-export const reservation = async ({ customerId, tables, arrivalTime }) => {
-  console.log("dataReservation", { customerId, tables, arrivalTime });
-  const res = await axios.post(API_RESERVATION.RESERVATION, { customerId, tables, arrivalTime });
+const instance = axios.create({
+  withCredentials: true,
+});
+
+export const reservation = async ({ tables, arrivalTime }) => {
+  console.log("dataReservation", { tables, arrivalTime });
+
+  const res = await instance.post(API_RESERVATION.RESERVATION, {
+    tables,
+    arrivalTime,
+  });
 
   return res.data;
-}
+};
