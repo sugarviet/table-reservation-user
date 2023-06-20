@@ -3,15 +3,20 @@ import { Select, Form, DatePicker, Space, Button } from 'antd';
 import Search from '../../../../assets/search.png'
 import HomeTable from '../HomeTable/HomeTable';
 import { onFinish } from "../../components/hooks/useSearchTable";
-import { useState } from 'react';
+import {useRef, useState } from 'react';
 import axios from "axios";
+import Loading from '../../../../components/Loading/Loading'
+import EmptyData from '../../../../components/EmptyData/EmptyData'
 
 const HomeContent = () => {
   onFinish;
   const [data, setData] = useState();
   const [capacity, setCapacity] = useState(0);
   const [timeRangeType, setTimeRangeType] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const API_URL = "http://localhost:7070";
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const scrollRef = useRef(null);
 
   const api = axios.create({
     baseURL: API_URL,
@@ -19,11 +24,19 @@ const HomeContent = () => {
   });
   const handleFormSubmit = async () => {
     try {
+      setIsFormSubmitted(true);
+      setIsLoading(true);
+      
       const response = await api.get("/table/search", { params: { capacity: Number(capacity), timeRangeType } });
-      setData(response.data);
-      console.log(data);
+      setData(response.listTable);
+
+      setIsLoading(false);
+      if (nodataRef.current) {
+        nodataRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
     }
   };
   return (
@@ -133,7 +146,21 @@ const HomeContent = () => {
         <h1 style={{ marginTop: '10px' }}> Or</h1>
         <h1 style={{ marginTop: '10px' }}>Call us : 098123320</h1>
       </div>
-      <HomeTable data={data} />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        isFormSubmitted ? (
+          <div ref={scrollRef}>
+            {data ? (
+              <HomeTable data = {data}/>
+            ) : (
+              <EmptyData style={{marginTop:'50px'}}/>
+              
+            )}
+          </div>
+        ) : null
+      )}
+
     </div>
   )
 }
