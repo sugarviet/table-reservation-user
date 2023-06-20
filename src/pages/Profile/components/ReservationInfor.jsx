@@ -5,13 +5,23 @@ import user from '../../../assets/user.png'
 import history from '../../../assets/file.png'
 import logout from '../../../assets/logout.png'
 import { useState } from 'react';
-const ReservationInfor = () => {
-  const [active, setActive] = useState(null);
+import jwtDecode from 'jwt-decode';
+import {useNavigate } from 'react-router-dom';
 
+const ReservationInfor = () => {
+
+  const [active, setActive] = useState(null);
+  const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+  const decodedToken = jwtDecode(token);
   const handleActive = (id) => {
     setActive(id);
+    if(id ==2){
+      localStorage.removeItem('token'); 
+      navigate('/login');
+    }
   }
-
+  
   return (
     <div style={{ paddingTop: '100px' }}>
       <Breadcrumb
@@ -37,7 +47,7 @@ const ReservationInfor = () => {
                 <div style={{ paddingBottom: '10px' }}>
                   <div className={styles.profileLeftName}>
                     <img src={user} style={{ width: '38px', paddingLeft: '10px' }} />
-                    <h1 style={{ color: '#242E52', fontSize: '18px', paddingLeft: '10px', paddingTop: '5px' }}>Trường Giang</h1>
+                    <h1 style={{ color: '#242E52', fontSize: '18px', paddingLeft: '10px', paddingTop: '5px' }}>{decodedToken.fullName}</h1>
                   </div>
                   <div
                     onClick={() => handleActive(1)}

@@ -23,8 +23,8 @@ const BookingContent = () => {
       _id: selectedTable?._id,
       depositAmount: {
         $numberDecimal: selectedTable?.depositPrice.$numberDecimal,
-      },
-    },
+      }
+    }
   ];
 
   const handleFormSubmit = () => {
@@ -193,7 +193,7 @@ const BookingContent = () => {
               htmlType="submit"
               className={styles.bookingBook}
               type="primary"
-              onClick={handlePayment}
+              // onClick={handlePayment}
             >
               Booking now
             </Button>
