@@ -1,4 +1,4 @@
-import BookingContent from "./BookingContent/BookingContent";
+import BookingContent from "../Booking/components/BookingContent/BookingContent";
 import styles from './Booking.module.css'
 const Booking = () => {
   return (

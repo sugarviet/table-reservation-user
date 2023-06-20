@@ -1,8 +1,8 @@
 import { Button, Form, Input, Select, Space } from "antd";
-import calendar from "../../../assets/calendar.png";
-import paypal from "../../../assets/paypal.png";
-import location from "../../../assets/pin.png";
-import people from "../../../assets/user.png";
+import calendar from "../../../../assets/calendar.png";
+import paypal from "../../../../assets/paypal.png";
+import location from "../../../../assets/pin.png";
+import people from "../../../../assets/people.png";
 import styles from "./BookingContent.module.css";
 import { Option } from "antd/es/mentions";
 import axios from "axios";
@@ -95,7 +95,7 @@ const BookingContent = () => {
           <div className={styles.bookingDetail}>
             <Form.Item
               name="name"
-              label={<span style={{ color: "#19912b" }}>Full Name</span>}
+              label={<span style={{ color: "#BD8E2E" }}>Full Name</span>}
               rules={[
                 {
                   required: true,
@@ -108,7 +108,7 @@ const BookingContent = () => {
             </Form.Item>
             <Form.Item
               name="arrivaltime"
-              label={<span style={{ color: "#19912b" }}>Arrival Time</span>}
+              label={<span style={{ color: "#BD8E2E" }}>Arrival Time</span>}
               rules={[
                 {
                   required: true,
@@ -124,7 +124,7 @@ const BookingContent = () => {
           <div>
             <Form.Item
               name="phone"
-              label={<span style={{ color: "#19912b" }}>Phone Number</span>}
+              label={<span style={{ color: "#BD8E2E" }}>Phone Number</span>}
               rules={[
                 {
                   required: true,

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import style from "./SignUpForm.module.css";
-
+import login from '../../../../assets/login.png'
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -65,11 +65,38 @@ const SignUpForm = () => {
     } catch (error) {
       // Handle error, such as displaying an error message to the user
       console.error(error);
+      if (error.response && error.response.data && error.response.data.error) {
+        // Trường hợp lỗi từ API chứa thông tin lỗi cụ thể
+        const errorMessage = error.response.data.error.message;
+        // Hiển thị thông báo lỗi cho người dùng, ví dụ: thông qua message của Form.Item
+        form.setFields([
+          {
+            name: ["user", "email"],
+            errors: [errorMessage],
+          },
+        ]);
+      }
     }
+  };
+
+  const validatePassword = (_, value) => {
+    if (!value) {
+      return Promise.reject('Please input your password!');
+    }
+    if (!/(?=.*[A-Z])(?=.*\d).{8,}/.test(value)) {
+      return Promise.reject('Password must contain at least one uppercase letter (A-Z), one digit, and be at least 8 characters long.');
+    }
+
+    return Promise.resolve();
   };
   return (
     <Row className={style.daddyContainer}>
-      <Col span={24}>
+      <Col span={12}>
+        <Link to="/">
+          <img src={login} style={{ width: '750px' }} />
+        </Link>
+      </Col>
+      <Col span={12}>
         <div className={style.container}>
           <Card
             hoverable
@@ -134,7 +161,7 @@ const SignUpForm = () => {
                 rules={[
                   {
                     required: true,
-                    message: "Please input your password!",
+                    validator: validatePassword,
                   },
                 ]}
                 hasFeedback
