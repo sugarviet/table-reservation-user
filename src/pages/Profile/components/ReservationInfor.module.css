@@ -73,3 +73,7 @@
     box-shadow: 0px 5px 8px #00000029;
     background-color: #ebe9e9;
 }
+.imageProfile{
+    display: flex;
+    flex-direction: row;
+}

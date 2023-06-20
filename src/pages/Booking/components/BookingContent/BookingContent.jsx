@@ -1,6 +1,7 @@
 import { Button, Form, Input, Select, Space } from "antd";
 import calendar from "../../../../assets/calendar.png";
-import paypal from "../../../../assets/paypal.png";
+// import paypal from "../../../../assets/paypal.png";
+import dollar from "../../../../assets/dollar.png";
 import address from "../../../../assets/pin.png";
 import people from "../../../../assets/people.png";
 import styles from "./BookingContent.module.css";
@@ -17,7 +18,7 @@ const BookingContent = () => {
   const { selectedTable } = location.state;
   const token = localStorage.getItem('token');
   const decodedToken = jwtDecode(token);
-
+  console.log(selectedTable);
   const tables = [
     {
       _id: selectedTable?._id,
@@ -32,7 +33,7 @@ const BookingContent = () => {
       mutate({
         customerId: decodedToken?.customerId,
         tables: tables,
-        arrivalTime: "20-06-2023 6h",
+        arrivalTime: "20-06-2023" + selectedTable?.depositPrice.$numberDecimal,
       });
     } catch (error) {
       console.error(error);
@@ -87,6 +88,7 @@ const BookingContent = () => {
               Yummy Pot
             </p>
           </div>
+
           <div className={styles.bookingDetail}>
             <img style={{ width: "25px" }} src={people} alt="people" />
             <p
@@ -111,7 +113,20 @@ const BookingContent = () => {
               20/06/2023, {selectedTable?.timeRangeType}
             </p>
           </div>
+          <div className={styles.bookingDetail}>
+            <img style={{ width: "27px" }} src={dollar} alt="address" />
+            <p
+              style={{
+                fontSize: "14px",
+                fontWeight: "500",
+                padding: "5px 0 0 7px",
+              }}
+            >
+              {selectedTable?.depositPrice.$numberDecimal}$
+            </p>
+          </div>
         </div>
+
         <h1
           style={{
             paddingTop: "20px",
@@ -193,7 +208,7 @@ const BookingContent = () => {
               htmlType="submit"
               className={styles.bookingBook}
               type="primary"
-              // onClick={handlePayment}
+            // onClick={handlePayment}
             >
               Booking now
             </Button>

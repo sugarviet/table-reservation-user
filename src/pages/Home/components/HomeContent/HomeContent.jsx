@@ -95,7 +95,7 @@ const HomeContent = () => {
                     // mode="multiple"
                     value={undefined}
                     placeholder="Select time range"
-                    style={{ width: 150 }}
+                    style={{ width: 150 ,color:'#000000'}}
                     bordered={false}
                     options={[
                       {
@@ -140,7 +140,7 @@ const HomeContent = () => {
           </div>
         </Form>
       </div>
-      <div className={styles.homeInfor}>
+      {/* <div className={styles.homeInfor}>
         <h1>Find table for you</h1>
         <p style={{ fontSize: "20px", marginTop: "10px" }}>
           Given your specific preferences, we will make recommendations to suit
@@ -148,7 +148,7 @@ const HomeContent = () => {
         </p>
         <h1 style={{ marginTop: "10px" }}> Or</h1>
         <h1 style={{ marginTop: "10px" }}>Call us : 098123320</h1>
-      </div>
+      </div> */}
       {isLoading ? (
           <Loading />
       ) : (
@@ -164,6 +164,16 @@ const HomeContent = () => {
         ) : null
       )}
 
+
+<style>
+        {`
+        :where(.css-dev-only-do-not-override-lbcgob).ant-select .ant-select-selection-placeholder {
+          /* Định dạng cho placeholder */
+          color: #333333;
+         
+        }
+        `}
+      </style>
     </div>
   );
 };

@@ -1,12 +1,18 @@
 import styles from './ReservationInfor.module.css'
 import { HomeOutlined, UserOutlined } from '@ant-design/icons';
-import { Breadcrumb, Row, Col } from 'antd';
+import { Breadcrumb, Row, Col, Badge, Descriptions, Button } from 'antd';
 import user from '../../../assets/user.png'
 import history from '../../../assets/file.png'
+import table1 from '../../../assets/table1.png'
+import pin1 from '../../../assets/pin1.png'
+import people1 from '../../../assets/people1.png'
+import dollar1 from '../../../assets/dollar1.png'
+import calendar1 from '../../../assets/calendar1.png'
+
 import logout from '../../../assets/logout.png'
 import { useState } from 'react';
 import jwtDecode from 'jwt-decode';
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ReservationInfor = () => {
 
@@ -16,12 +22,12 @@ const ReservationInfor = () => {
   const decodedToken = jwtDecode(token);
   const handleActive = (id) => {
     setActive(id);
-    if(id ==2){
-      localStorage.removeItem('token'); 
+    if (id == 2) {
+      localStorage.removeItem('token');
       navigate('/login');
     }
   }
-  
+
   return (
     <div style={{ paddingTop: '100px' }}>
       <Breadcrumb
@@ -74,6 +80,16 @@ const ReservationInfor = () => {
                 <h1 style={{ fontSize: '1.3em' }}>Reservation History</h1>
                 <hr style={{ width: '100%', border: '1.5px solid #ffffff', margin: '13px 0 13px 0' }} />
                 <div className={styles.profileContentRight}>
+                  <Descriptions title={<h1 style={{fontSize:'21px'}}><img src={history} style={{ width: '25px', marginRight: '10px'}} />{decodedToken.fullName} </h1>} bordered>
+                    <Descriptions.Item label={<div className={styles.imageProfile}><img src={pin1} style={{ width: '21px', marginRight: '10px'}} /><p>Location </p></div>}>Yummy Pot</Descriptions.Item>
+                    <Descriptions.Item label={<div className={styles.imageProfile}><img src={table1} style={{ width: '20px', marginRight: '10px'}} /><p>Number table </p></div>}>7</Descriptions.Item>
+                    <Descriptions.Item label={<div className={styles.imageProfile}><img src={people1} style={{ width: '20px', marginRight: '10px'}} /><p>Capacity</p></div>}>10</Descriptions.Item>
+                    <Descriptions.Item label={<div className={styles.imageProfile}><img src={dollar1} style={{ width: '20px', marginRight: '10px'}} /><p>Price </p></div>}>50$</Descriptions.Item>
+                    <Descriptions.Item label={<div className={styles.imageProfile}><img src={calendar1} style={{ width: '20px', marginRight: '10px'}} /><p>Arrival time </p></div>} span={2}>
+                      20-06-2023, 6:00 AM
+                    </Descriptions.Item>
+
+                  </Descriptions>
                 </div>
               </div>
             </Col>
