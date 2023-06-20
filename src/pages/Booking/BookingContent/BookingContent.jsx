@@ -26,7 +26,7 @@ const BookingContent = () => {
       const response = await axios.post("http://localhost:7070/payment/init", {
         amount: 10.0, // Example amount
         currency: "USD", // Example currency
-        itemName: "Item Name", // Example item name
+        itemName: "Yummy Pot table reservation", // Example item name
       });
 
       // Redirect the user to the PayPal payment approval URL
