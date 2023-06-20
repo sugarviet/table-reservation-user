@@ -1,15 +1,12 @@
-import { Button, Checkbox, Modal } from 'antd';
-import { useState } from 'react';
+import { Button } from 'antd';
 import { useNavigate } from "react-router-dom";
 import styles from './HomeTable.module.css';
+
 const HomeTable = ({ data }) => {
-    console.log(data);
-    const timeOptions = ['8:00 AM', '10:00 PM', '12:00 PM'];
     const navigate = useNavigate();
-
-    const handleChooseTable = () => {
-        navigate("/booking");
-
+    const handleChooseTable = (table) => {
+        navigate('/booking', { state: { selectedTable: table } });
+       
     };
     return (
         <div style={{ paddingBottom: '50px' }}>
@@ -26,12 +23,12 @@ const HomeTable = ({ data }) => {
                 <div className={styles.tableTable} key={index}>
                     <h1 style={{ padding: '20px 20px' }}>Table for {table?.capacity} people</h1>
                     <div className={styles.tableTableTime}>
-                        <Button type="primary" onClick={handleChooseTable} className={styles.tableTableBtn}>
+                        <Button type="primary" onClick={() => handleChooseTable(table)} className={styles.tableTableBtn}>
                             {table?.timeRangeType}
                         </Button>
-                        <p style={{marginTop:'5px',fontSize:'19px',paddingLeft:'5px'}}>Price: {table?.depositPrice && table.depositPrice.$numberDecimal}$</p>
+                        <p style={{ marginTop: '5px', fontSize: '19px', paddingLeft: '5px' }}>Price: {table?.depositPrice && table.depositPrice.$numberDecimal}$</p>
                     </div>
-                    
+
                 </div>
             ))}
         </div>

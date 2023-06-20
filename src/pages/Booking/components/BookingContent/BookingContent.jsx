@@ -1,13 +1,44 @@
 import { Button, Form, Input, Select, Space } from "antd";
 import calendar from "../../../../assets/calendar.png";
 import paypal from "../../../../assets/paypal.png";
-import location from "../../../../assets/pin.png";
+import address from "../../../../assets/pin.png";
 import people from "../../../../assets/people.png";
 import styles from "./BookingContent.module.css";
 import { Option } from "antd/es/mentions";
 import axios from "axios";
+import { useLocation } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
+import { useReservation } from "../../../../services/Reservation/services";
 
 const BookingContent = () => {
+
+  const { mutate } = useReservation();
+  const location = useLocation();
+  const { selectedTable } = location.state;
+  const token = localStorage.getItem('token');
+  const decodedToken = jwtDecode(token);
+
+  const tables = [
+    {
+      _id: selectedTable?._id,
+      depositAmount: {
+        $numberDecimal: selectedTable?.depositPrice.$numberDecimal,
+      },
+    },
+  ];
+
+  const handleFormSubmit = () => {
+    try {
+      mutate({
+        customerId: decodedToken?.customerId,
+        tables: tables,
+        arrivalTime:"20-06-2023 6h"
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
       <Select
@@ -39,13 +70,13 @@ const BookingContent = () => {
 
   return (
     <div style={{ textAlign: "center" }}>
-      <Form layout="vertical">
+      <Form layout="vertical" onFinish={handleFormSubmit}>
         <h1 style={{ paddingTop: "90px", color: "#ffffff" }}>
           Please check your reservation information
         </h1>
         <div className={styles.bookingContent}>
           <div className={styles.bookingDetail}>
-            <img style={{ width: "27px" }} src={location} />
+            <img style={{ width: "27px" }} src={address} />
             <p
               style={{
                 fontSize: "14px",
@@ -65,7 +96,7 @@ const BookingContent = () => {
                 padding: "5px 0 0 7px",
               }}
             >
-              Table for 4 people
+              Table for {selectedTable?.capacity} people
             </p>
           </div>
           <div className={styles.bookingDetail}>
@@ -77,7 +108,7 @@ const BookingContent = () => {
                 padding: "5px 0 0 7px",
               }}
             >
-              18/06/2023, 6:45 PM
+              20/06/2023, {selectedTable?.timeRangeType}
             </p>
           </div>
         </div>
@@ -104,7 +135,12 @@ const BookingContent = () => {
                 },
               ]}
             >
-              <Input size="large" style={{ width: "420px" }} />
+              <Input
+                size="large"
+                style={{ width: "420px" }}
+                initialValue={decodedToken?.fullName}
+                value=''
+              />
             </Form.Item>
             <Form.Item
               name="arrivaltime"
@@ -118,7 +154,12 @@ const BookingContent = () => {
               ]}
               style={{ paddingLeft: "38px" }}
             >
-              <Input size="large" style={{ width: "420px" }} />
+              <Input
+                size="large"
+                style={{ width: "420px" }}
+                initialValue={"20-06-2023 " + selectedTable?.timeRangeType}
+                value=''
+              />
             </Form.Item>
           </div>
           <div>
@@ -138,6 +179,8 @@ const BookingContent = () => {
                   width: "48%",
                 }}
                 size="large"
+                initialValue={decodedToken?.phone}
+                value=''
               />
             </Form.Item>
           </div>
@@ -146,43 +189,23 @@ const BookingContent = () => {
             required field, you must enter it completely.
           </p>
         </div>
-        <h1
-          style={{
-            paddingTop: "20px",
-            color: "#ffffff",
-            fontSize: "18px",
-            marginRight: "820px",
-          }}
-        >
-          Payment:
-        </h1>
-        <div className={styles.bookingContent1}>
-          <Space wrap></Space>
-        </div>
+
         <div className={styles.bookingContent1}>
           <Space wrap>
             <Button
               htmlType="submit"
               className={styles.bookingBook}
               type="primary"
-              onClick={handlePayment}
+            // onClick={handlePayment}
             >
               Booking now
             </Button>
           </Space>
         </div>
       </Form>
-      <Button
-        htmlType="submit"
-        className={styles.bookingBook1}
-        icon={<img style={{ width: "15px", marginTop: "1px" }} src={paypal} />}
-        size="large"
-        type="primary"
-        onClick={handlePayment}
-      >
-        PayPal
-      </Button>
     </div>
   );
 };
 export default BookingContent;
+
+

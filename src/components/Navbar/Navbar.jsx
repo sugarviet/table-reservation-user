@@ -9,11 +9,24 @@ import {
 import styles from "./Navbar.module.css";
 import Drawer from "./components/Drawer";
 import useNavbar from "./hooks/useNavbar";
+import { useState,useEffect } from "react";
+import jwtDecode from 'jwt-decode';
 
 const { Header } = Layout;
 const { Search } = Input;
 
 const Navbar = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      if (decodedToken) {
+        setLoggedIn(true);
+      }
+    }
+  }, []);
 
   const items = [
     {
@@ -47,20 +60,23 @@ const Navbar = () => {
           <div className={styles.navbarAction}>
             <ul className={styles.navbarActionList}>
               <li>
-                {/* <Link to={'/login'}>
-                  <Button>Login</Button>
-                </Link> */}
-                <Dropdown
-                  placement="bottom"
-                  menu={{
-                    items,
-                  }}
-                  trigger={['click']}
-                >
-                  <a onClick={(e) => e.preventDefault()}>
-                    <img src={profile} style={{ width: '40px', marginTop: '25px' }} />
-                  </a>
-                </Dropdown>
+                {loggedIn ? (
+                  <Dropdown
+                    placement="bottom"
+                    menu={{
+                      items,
+                    }}
+                    trigger={['click']}
+                  >
+                    <a onClick={(e) => e.preventDefault()}>
+                      <img src={profile} style={{ width: '40px', marginTop: '25px' }} />
+                    </a>
+                  </Dropdown>
+                ) : (
+                  <Link to={'/login'}>
+                    <Button>Login</Button>
+                  </Link>
+                )}
               </li>
             </ul>
             <Button
