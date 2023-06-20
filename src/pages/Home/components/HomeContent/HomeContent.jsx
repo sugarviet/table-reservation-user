@@ -3,7 +3,7 @@ import { Select, Form, DatePicker, Space, Button } from "antd";
 import Search from "../../../../assets/search.png";
 import HomeTable from "../HomeTable/HomeTable";
 import { onFinish } from "../../components/hooks/useSearchTable";
-import {useRef, useState } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 import Loading from '../../../../components/Loading/Loading'
 import EmptyData from '../../../../components/EmptyData/EmptyData'
@@ -26,7 +26,7 @@ const HomeContent = () => {
     try {
       setIsFormSubmitted(true);
       setIsLoading(true);
-      
+
       let api = `http://localhost:7070/table/search?`;
       if (capacity !== 0) {
         api += `capacity=${capacity}&`;
@@ -163,10 +163,10 @@ const HomeContent = () => {
         isFormSubmitted ? (
           <div ref={scrollRef}>
             {data ? (
-              <HomeTable data = {data}/>
+              <HomeTable data={data} />
             ) : (
-              <EmptyData style={{marginTop:'50px'}}/>
-              
+              <EmptyData style={{ marginTop: '50px' }} />
+
             )}
           </div>
         ) : null
