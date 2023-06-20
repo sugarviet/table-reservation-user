@@ -1,5 +1,5 @@
 import { Button, Input, Layout, Tooltip, Dropdown } from "antd";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import logo from '../../assets/logo.png';
 import profile from '../../assets/profile.png';
 import {
@@ -9,15 +9,16 @@ import {
 import styles from "./Navbar.module.css";
 import Drawer from "./components/Drawer";
 import useNavbar from "./hooks/useNavbar";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import jwtDecode from 'jwt-decode';
+import {useNavigate } from 'react-router-dom';
 
 const { Header } = Layout;
 const { Search } = Input;
 
 const Navbar = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -28,6 +29,10 @@ const Navbar = () => {
     }
   }, []);
 
+  const logout = () => {
+    localStorage.removeItem('token'); 
+    navigate('/login');
+  };
   const items = [
     {
       label: <Link to='/profile'>My Profile</Link>,
@@ -38,7 +43,7 @@ const Navbar = () => {
       type: 'divider',
     },
     {
-      label: <Link to='/profile'>Log Out</Link>,
+      label: <div onClick={logout}>Log Out</div>,
       key: '2',
     },
   ];

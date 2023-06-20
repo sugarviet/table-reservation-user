@@ -7,11 +7,10 @@ import { useState } from "react";
 import axios from "axios";
 import Loading from '../../../../components/Loading/Loading'
 import EmptyData from '../../../../components/EmptyData/EmptyData'
-import {useNavigate } from 'react-router-dom';
 
 const HomeContent = () => {
   onFinish;
-  const navigate = useNavigate();
+ 
   const [data, setData] = useState(null);
   const [capacity, setCapacity] = useState(0);
   const [timeRangeType, setTimeRangeType] = useState("");

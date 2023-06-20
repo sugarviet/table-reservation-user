@@ -32,7 +32,7 @@ const BookingContent = () => {
       mutate({
         customerId: decodedToken?.customerId,
         tables: tables,
-        arrivalTime:"20-06-2023 6h"
+        arrivalTime: "20-06-2023 6h",
       });
     } catch (error) {
       console.error(error);
@@ -76,7 +76,7 @@ const BookingContent = () => {
         </h1>
         <div className={styles.bookingContent}>
           <div className={styles.bookingDetail}>
-            <img style={{ width: "27px" }} src={address} />
+            <img style={{ width: "27px" }} src={address} alt="address" />
             <p
               style={{
                 fontSize: "14px",
@@ -88,7 +88,7 @@ const BookingContent = () => {
             </p>
           </div>
           <div className={styles.bookingDetail}>
-            <img style={{ width: "25px" }} src={people} />
+            <img style={{ width: "25px" }} src={people} alt="people" />
             <p
               style={{
                 fontSize: "14px",
@@ -100,7 +100,7 @@ const BookingContent = () => {
             </p>
           </div>
           <div className={styles.bookingDetail}>
-            <img style={{ width: "25px" }} src={calendar} />
+            <img style={{ width: "25px" }} src={calendar} alt="calendar" />
             <p
               style={{
                 fontSize: "14px",
@@ -138,8 +138,7 @@ const BookingContent = () => {
               <Input
                 size="large"
                 style={{ width: "420px" }}
-                initialValue={decodedToken?.fullName}
-                value=''
+                defaultValue={decodedToken?.fullName}
               />
             </Form.Item>
             <Form.Item
@@ -157,8 +156,7 @@ const BookingContent = () => {
               <Input
                 size="large"
                 style={{ width: "420px" }}
-                initialValue={"20-06-2023 " + selectedTable?.timeRangeType}
-                value=''
+                defaultValue={"20-06-2023 " + selectedTable?.timeRangeType}
               />
             </Form.Item>
           </div>
@@ -179,8 +177,7 @@ const BookingContent = () => {
                   width: "48%",
                 }}
                 size="large"
-                initialValue={decodedToken?.phone}
-                value=''
+                defaultValue={decodedToken?.phone}
               />
             </Form.Item>
           </div>
@@ -196,7 +193,7 @@ const BookingContent = () => {
               htmlType="submit"
               className={styles.bookingBook}
               type="primary"
-            // onClick={handlePayment}
+              onClick={handlePayment}
             >
               Booking now
             </Button>
@@ -206,6 +203,5 @@ const BookingContent = () => {
     </div>
   );
 };
+
 export default BookingContent;
-
-
