@@ -44,7 +44,7 @@ const HomeContent = () => {
       <h1 className={styles.homeHeader}>Table Reservation Online</h1>
       <p className={styles.homeDes}>Book your table early at our restaurant</p>
       <div className={styles.homeSearch}>
-        <Form className={styles.homeForm} onFinish={handleFormSubmit}>
+        <Form className={styles.homeForm} onFinish={handleFormSubmit} >
           <div className={styles.homeGroup}>
             <div className={styles.homeChoose}>
               <p className={styles.homeTitleChoose}>Capacity of table</p>

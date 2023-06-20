@@ -22,7 +22,7 @@ const BookingContent = () => {
     {
       _id: selectedTable?._id,
       depositAmount: {
-        $numberDecimal: selectedTable?.depositPrice.$numberDecimal,
+        $numberDecimal: "10",
       }
     }
   ];
@@ -70,7 +70,7 @@ const BookingContent = () => {
 
   return (
     <div style={{ textAlign: "center" }}>
-      <Form layout="vertical" onFinish={handleFormSubmit}>
+      <Form layout="vertical" onFinish={handleFormSubmit} initialValues={decodedToken}>
         <h1 style={{ paddingTop: "90px", color: "#ffffff" }}>
           Please check your reservation information
         </h1>
