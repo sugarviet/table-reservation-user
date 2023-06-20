@@ -2,22 +2,46 @@ import styles from './HomeContent.module.css'
 import { Select, Form, DatePicker, Space, Button } from 'antd';
 import Search from '../../../../assets/search.png'
 import HomeTable from '../HomeTable/HomeTable';
+import { onFinish } from "../../components/hooks/useSearchTable";
+import { useState } from 'react';
+import axios from "axios";
 
 const HomeContent = () => {
+  onFinish;
+  const [data, setData] = useState();
+  const [capacity, setCapacity] = useState(0);
+  const [timeRangeType, setTimeRangeType] = useState("");
+  const API_URL = "http://localhost:7070";
 
+  const api = axios.create({
+    baseURL: API_URL,
+    withCredentials: true,
+  });
+  const handleFormSubmit = async () => {
+    try {
+      const response = await api.get("/table/search", { params: { capacity: Number(capacity), timeRangeType } });
+      setData(response.data);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className={styles.homeContent}>
       <h1 className={styles.homeHeader}>Table Reservation Online</h1>
       <p className={styles.homeDes}>Book your table early at our restaurant</p>
       <div className={styles.homeSearch}>
-        <Form className={styles.homeForm}>
+        <Form
+          className={styles.homeForm}
+          onFinish={handleFormSubmit}
+        >
           <div className={styles.homeGroup}>
             <div className={styles.homeChoose}>
               <p className={styles.homeTitleChoose}>Capacity of table</p>
               <Form.Item>
                 <Space wrap>
                   <Select
-                    defaultValue="4 people"
+                    defaultValue="0"
                     style={{
                       width: 120,
                     }}
@@ -40,15 +64,17 @@ const HomeContent = () => {
                         label: '10 people',
                       },
                     ]}
+                    onChange={(value) => setCapacity(value)}
                   />
                 </Space>
               </Form.Item>
             </div>
             <div className={styles.homeChoose}>
               <p className={styles.homeTitleChoose}>Date</p>
-              <Form.Item>
+              {/* <Form.Item>
                 <DatePicker bordered={false} />
-              </Form.Item>
+              </Form.Item> */}
+              <DatePicker bordered={false} />
             </div>
             <div className={styles.homeChoose}>
               <p className={styles.homeTitleChoose}>Time</p>
@@ -56,27 +82,32 @@ const HomeContent = () => {
                 <Space wrap>
                   <Select
                     // mode="multiple"
-                    defaultValue='8:00'
+                    defaultValue=""
                     style={{ width: 120 }}
                     bordered={false}
                     options={[
                       {
-                        value: '8',
+                        value: "6h",
+                        label: '6:00',
+                      },
+                      {
+                        value: '8h',
                         label: '8:00',
                       },
                       {
-                        value: '9',
+                        value: '9h',
                         label: '9:00',
                       },
                       {
-                        value: '10',
+                        value: '10h',
                         label: '10:00',
                       },
                       {
-                        value: '12',
+                        value: '12h',
                         label: '12:00',
                       },
                     ]}
+                    onChange={(value) => setTimeRangeType(value)}
                   >
                     {/* {plainOptions.map((option) => (
                       <Option key={option} value={option}>
@@ -87,23 +118,22 @@ const HomeContent = () => {
                 </Space>
               </Form.Item></div>
 
-            <Button className={styles.homeBtn}>
+            <Button className={styles.homeBtn} htmlType="submit">
               <div className={styles.homeChoose1}>
-                <img style={{width:'30px'}} src={Search}></img>
+                <img style={{ width: '30px' }} src={Search}></img>
                 <p className={styles.homeSearchTxt}>Search</p>
               </div>
             </Button>
-
           </div>
         </Form>
       </div>
       <div className={styles.homeInfor}>
         <h1>Find table for you</h1>
-        <p style={{fontSize:'20px',marginTop:'10px'}}>Given your specific preferences, we will make recommendations to suit your requirements</p>
-        <h1 style={{marginTop:'10px'}}> Or</h1>
-        <h1 style={{marginTop:'10px'}}>Call us : 098123320</h1>
+        <p style={{ fontSize: '20px', marginTop: '10px' }}>Given your specific preferences, we will make recommendations to suit your requirements</p>
+        <h1 style={{ marginTop: '10px' }}> Or</h1>
+        <h1 style={{ marginTop: '10px' }}>Call us : 098123320</h1>
       </div>
-     <HomeTable/>
+      <HomeTable data={data} />
     </div>
   )
 }

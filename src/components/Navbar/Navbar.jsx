@@ -1,7 +1,7 @@
-import { Button, Input, Layout, Tooltip } from "antd";
+import { Button, Input, Layout, Tooltip, Dropdown } from "antd";
 import { Link } from "react-router-dom";
 import logo from '../../assets/logo.png';
-
+import profile from '../../assets/profile.png';
 import {
   CloseOutlined,
   MenuOutlined
@@ -16,6 +16,20 @@ const { Header } = Layout;
 const { Search } = Input;
 
 const Navbar = () => {
+  const items = [
+    {
+      label: <Link to='/profile'>My Profile</Link>,
+      key: '0',
+    },
+
+    {
+      type: 'divider',
+    },
+    {
+      label: <Link to='/profile'>Log Out</Link>,
+      key: '2',
+    },
+  ];
   const {
     isDrawerVisible,
     handleShowDrawable,
@@ -29,14 +43,25 @@ const Navbar = () => {
       <Header className={styles.navbar}>
         <div className={styles.navbarContainer}>
           <div className={styles.navbarLogo}>
-            <Link to={"/"} className={styles.whiteText}><img className={styles.logo} src={logo}/></Link>
+            <Link to={"/"} className={styles.whiteText}><img className={styles.logo} src={logo} /></Link>
           </div>
           <div className={styles.navbarAction}>
             <ul className={styles.navbarActionList}>
               <li>
-                <Link to={'/login'}>
+                {/* <Link to={'/login'}>
                   <Button>Login</Button>
-                </Link>
+                </Link> */}
+                <Dropdown
+                  placement="bottom"
+                  menu={{
+                    items,
+                  }}
+                  trigger={['click']}
+                >
+                  <a onClick={(e) => e.preventDefault()}>
+                    <img src={profile} style={{ width: '40px', marginTop: '25px' }} />
+                  </a>
+                </Dropdown>
               </li>
             </ul>
             <Button
@@ -64,7 +89,7 @@ const Navbar = () => {
       </div>
 
       {/* Show menu when on mobile's screen */}
-        <Drawer isDrawerVisible={isDrawerVisible} hideDrawer={hideDrawer}/>
+      <Drawer isDrawerVisible={isDrawerVisible} hideDrawer={hideDrawer} />
     </Layout>
   );
 };

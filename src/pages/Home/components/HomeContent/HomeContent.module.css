@@ -26,7 +26,7 @@
     width: 100%;
 }
 .homeGroup{
-    color: #19912b;
+    color: #BD8E2E;
     padding: 0 0 0 15px;
     flex-wrap: wrap;
     display: flex;
@@ -49,7 +49,7 @@
     padding: 0 30px;
 }
 .homeBtn{
-    background-color: #19912b;
+    background-color: #BD8E2E;
     width: 200px;
     height: 90px;
     border-radius: 0 8px 8px 0;

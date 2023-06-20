@@ -1,0 +1,75 @@
+.profileContentLeft {
+    background-color: #f4f2ef;
+    border-radius: 10px;
+    box-shadow: 0 5px 8px #00000026;
+    margin-bottom: 1.625rem;
+    margin-top: 30px;
+    margin-right: 20px;
+}
+
+.profileContentRight {
+    padding: 2em 3em;
+    background-color: #f4f2ef;
+    border-radius: 0.5em;
+    box-shadow: 0 5px 8px #00000026;
+
+}
+
+.profileLeftName {
+    display: flex;
+    flex-direction: row;
+    margin-top: 16px;
+}
+
+.profileLeftName1 {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    padding: 10px 5px;
+}
+
+.profileLeftName1:hover {
+    box-shadow: 0px 5px 8px #00000029;
+    background-color: #ebe9e9;
+}
+.profileLeftName2 {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    padding: 10px 5px;
+    box-shadow: 0px 5px 8px #00000029;
+    background-color: #fff;
+    
+}
+
+.profileLeftName2:hover {
+    box-shadow: 0px 5px 8px #00000029;
+    background-color: #ebe9e9;
+}
+.profileLeftName3 {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    padding: 10px 5px;
+    margin-bottom: 10px;
+}
+
+.profileLeftName3:hover {
+    box-shadow: 0px 5px 8px #00000029;
+    background-color: #ebe9e9;
+}
+
+.profileLeftName4 {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    padding: 10px 5px;
+    box-shadow: 0px 5px 8px #00000029;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+.profileLeftName4:hover {
+    box-shadow: 0px 5px 8px #00000029;
+    background-color: #ebe9e9;
+}

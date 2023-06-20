@@ -1,7 +1,7 @@
 .bookingContent{
     font-family: "Roboto",sans-serif;
     background-color: #ffffff;
-    color: #19912b;
+    color: #BD8E2E;
     border-radius: 0.5rem;
     text-align: left;
     display: flex;
@@ -21,7 +21,7 @@
 .bookingContent1{
     font-family: "Roboto",sans-serif;
     background-color: #ffffff;
-    color: #19912b;
+    color: #BD8E2E;
     border-radius: 0.5rem;
     text-align: left;
     display: flex;
@@ -33,7 +33,11 @@
     padding: 10px 10px;
 }
 .bookingBook{
+    background-color: #BD8E2E;
     width: 880px;
+}
+.bookingBook:hover{
+    background-color: #a77a20 !important;
 }
 .bookingBook1{
     width: 110px;
