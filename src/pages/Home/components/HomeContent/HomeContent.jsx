@@ -151,7 +151,7 @@ const HomeContent = () => {
         <h1 style={{ marginTop: "10px" }}>Call us : 098123320</h1>
       </div>
       {isLoading ? (
-        <Loading />
+          <Loading />
       ) : (
         isFormSubmitted ? (
           <div>
