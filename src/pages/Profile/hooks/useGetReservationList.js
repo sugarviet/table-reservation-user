@@ -1,13 +1,8 @@
 import { useGetReservation } from "../../../services/Reservation/services";
 
-
 function useGetReservationList() {
-
   const { data, isLoading } = useGetReservation();
-  return (
-    data,
-    isLoading
-  )
+  console.log("Inside", data);
+  return { data, isLoading };
 }
 export default useGetReservationList;
-
