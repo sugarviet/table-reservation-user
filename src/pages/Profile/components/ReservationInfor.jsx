@@ -145,16 +145,18 @@ const ReservationInfor = () => {
                   }}
                 />
                 <div className={styles.profileContentRight}>
-                  {console.log("dmmGiang", data)}
+                  <div style={{display:'flex',flexDirection:"row"}}>
+                    <img
+                      src={history}
+                      style={{ width: "35px", marginRight: "10px" }}
+                    />
+                    <h1>{decodedToken.fullName}</h1>
+                  </div>
                   {data?.map((reservation) => (
                     <Descriptions
                       title={
-                        <h1 style={{ fontSize: "21px" }}>
-                          <img
-                            src={history}
-                            style={{ width: "25px", marginRight: "10px" }}
-                          />
-                          {decodedToken.fullName}{" "}
+                        <h1 style={{ fontSize: "21px", marginBottom: '17px' }}>
+                          {" "}
                         </h1>
                       }
                       bordered

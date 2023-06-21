@@ -172,7 +172,7 @@ const BookingContent = () => {
         <div className={styles.bookingContent1}>
           <div className={styles.bookingDetail}>
             <Form.Item
-              name="name"
+              name="fullName"
               label={<span style={{ color: "#BD8E2E" }}>Full Name</span>}
               rules={[
                 {
@@ -189,11 +189,10 @@ const BookingContent = () => {
               />
             </Form.Item>
             <Form.Item
-              name="arrivaltime"
+              name="arrivalTime"
               label={<span style={{ color: "#BD8E2E" }}>Arrival Time</span>}
               rules={[
                 {
-                  required: true,
                   message: "Please input your arrival time!",
                   whitespace: true,
                 },
