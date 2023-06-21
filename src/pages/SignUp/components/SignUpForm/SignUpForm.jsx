@@ -59,16 +59,13 @@ const SignUpForm = () => {
         confirmPassword,
         fullName,
       });
-      console.log(response);
       navigate("/login");
       // Handle successful login here, such as storing tokens in local storage or Redux state
     } catch (error) {
       // Handle error, such as displaying an error message to the user
       console.error(error);
       if (error.response && error.response.data && error.response.data.error) {
-        // Trường hợp lỗi từ API chứa thông tin lỗi cụ thể
         const errorMessage = error.response.data.error.message;
-        // Hiển thị thông báo lỗi cho người dùng, ví dụ: thông qua message của Form.Item
         form.setFields([
           {
             name: ["user", "email"],

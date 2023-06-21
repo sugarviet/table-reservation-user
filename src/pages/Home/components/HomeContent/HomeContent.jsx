@@ -168,9 +168,7 @@ const HomeContent = () => {
 <style>
         {`
         :where(.css-dev-only-do-not-override-lbcgob).ant-select .ant-select-selection-placeholder {
-          /* Định dạng cho placeholder */
           color: #333333;
-         
         }
         `}
       </style>
