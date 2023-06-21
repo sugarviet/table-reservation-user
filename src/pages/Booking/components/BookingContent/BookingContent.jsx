@@ -1,19 +1,18 @@
 import { Button, Form, Input, Select, Space } from "antd";
 import calendar from "../../../../assets/calendar.png";
 // import paypal from "../../../../assets/paypal.png";
-import dollar from "../../../../assets/dollar.png";
-import address from "../../../../assets/pin.png";
-import people from "../../../../assets/people.png";
-import styles from "./BookingContent.module.css";
 import { Option } from "antd/es/mentions";
 import axios from "axios";
-import { useLocation ,useNavigate} from "react-router-dom";
 import jwtDecode from "jwt-decode";
+import { useLocation } from "react-router-dom";
+import dollar from "../../../../assets/dollar.png";
+import people from "../../../../assets/people.png";
+import address from "../../../../assets/pin.png";
 import { useReservation } from "../../../../services/Reservation/services";
+import styles from "./BookingContent.module.css";
 
 const BookingContent = () => {
   const { mutate } = useReservation();
-  const navigate = useNavigate();
   const location = useLocation();
   const { selectedTable } = location.state;
   const token = localStorage.getItem("token");
@@ -36,7 +35,6 @@ const BookingContent = () => {
         arrivalTime: value.arrivaltime,
       });
       handlePayment();
-      navigate('/')
     } catch (error) {
       console.error(error);
     }
