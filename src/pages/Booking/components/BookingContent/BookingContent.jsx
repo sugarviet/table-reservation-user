@@ -23,7 +23,7 @@ const BookingContent = () => {
     {
       _id: selectedTable?._id,
       depositAmount: {
-        $numberDecimal: "10",
+        $numberDecimal: selectedTable?.depositPrice.$numberDecimal,
       },
     },
   ];
