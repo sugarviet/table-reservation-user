@@ -5,12 +5,12 @@ import HomeTable from "../HomeTable/HomeTable";
 import { onFinish } from "../../components/hooks/useSearchTable";
 import { useState } from "react";
 import axios from "axios";
-import Loading from '../../../../components/Loading/Loading'
-import EmptyData from '../../../../components/EmptyData/EmptyData'
+import Loading from "../../../../components/Loading/Loading";
+import EmptyData from "../../../../components/EmptyData/EmptyData";
 
 const HomeContent = () => {
   onFinish;
- 
+
   const [data, setData] = useState(null);
   const [capacity, setCapacity] = useState(0);
   const [timeRangeType, setTimeRangeType] = useState("");
@@ -33,7 +33,6 @@ const HomeContent = () => {
       setData(response.data.listTable);
       console.log(response.data.listTable);
       setIsLoading(false);
-      
     } catch (error) {
       console.error(error);
       setIsLoading(false);
@@ -44,7 +43,7 @@ const HomeContent = () => {
       <h1 className={styles.homeHeader}>Table Reservation Online</h1>
       <p className={styles.homeDes}>Book your table early at our restaurant</p>
       <div className={styles.homeSearch}>
-        <Form className={styles.homeForm} onFinish={handleFormSubmit} >
+        <Form className={styles.homeForm} onFinish={handleFormSubmit}>
           <div className={styles.homeGroup}>
             <div className={styles.homeChoose}>
               <p className={styles.homeTitleChoose}>Capacity of table</p>
@@ -61,10 +60,6 @@ const HomeContent = () => {
                       {
                         value: "4",
                         label: "4 people",
-                      },
-                      {
-                        value: "6",
-                        label: "6 people",
                       },
                       {
                         value: "8",
@@ -95,7 +90,7 @@ const HomeContent = () => {
                     // mode="multiple"
                     value={undefined}
                     placeholder="Select time range"
-                    style={{ width: 150 ,color:'#000000'}}
+                    style={{ width: 150, color: "#000000" }}
                     bordered={false}
                     options={[
                       {
@@ -107,16 +102,8 @@ const HomeContent = () => {
                         label: "8:00",
                       },
                       {
-                        value: "9h",
-                        label: "9:00",
-                      },
-                      {
                         value: "10h",
                         label: "10:00",
-                      },
-                      {
-                        value: "12h",
-                        label: "12:00",
                       },
                     ]}
                     onChange={(value) => setTimeRangeType(value)}
@@ -150,22 +137,18 @@ const HomeContent = () => {
         <h1 style={{ marginTop: "10px" }}>Call us : 098123320</h1>
       </div> */}
       {isLoading ? (
-          <Loading />
-      ) : (
-        isFormSubmitted ? (
-          <div>
-            {data != null ? (
-              <HomeTable data={data} />
-            ) : (
-              <EmptyData style={{ marginTop: '50px' }} />
+        <Loading />
+      ) : isFormSubmitted ? (
+        <div>
+          {data != null ? (
+            <HomeTable data={data} />
+          ) : (
+            <EmptyData style={{ marginTop: "50px" }} />
+          )}
+        </div>
+      ) : null}
 
-            )}
-          </div>
-        ) : null
-      )}
-
-
-<style>
+      <style>
         {`
         :where(.css-dev-only-do-not-override-lbcgob).ant-select .ant-select-selection-placeholder {
           color: #333333;
