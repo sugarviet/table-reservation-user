@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import styles from "./HomeTable.module.css";
-
+import dish from '../../../../assets/dish.png'
 const HomeTable = ({ data }) => {
   const navigate = useNavigate();
   const handleChooseTable = (table) => {
@@ -32,27 +32,47 @@ const HomeTable = ({ data }) => {
           <br /> you can pick up more time at below
         </p>
       </div>
-      {data?.map((table, index) => (
-        <div className={styles.tableTable} key={index}>
-          <h1 style={{ padding: "20px 20px" }}>
-            Table {table?.capacity} people
+      <div className={styles.tableTable}>
+        <img className={styles.imgTable} src={dish} />
+        <h1 className={styles.textTable}>7</h1>
+        <div>
+          <h1 className={styles.textTable1}>
+            Table For 10 People
           </h1>
-          <div className={styles.tableTableTime}>
-            <Button
-              type="primary"
-              onClick={() => handleChooseTable(table)}
-              className={styles.tableTableBtn}
-            >
-              {table?.timeRangeType}
-            </Button>
-            <p
-              style={{ marginTop: "5px", fontSize: "19px", paddingLeft: "5px" }}
-            >
-              Price: {table?.depositPrice && table.depositPrice.$numberDecimal}$
-            </p>
-          </div>
+          <p className={styles.textTable2}>10$</p>
         </div>
-      ))}
+        <div className={styles.tableTableTime}>
+          <Button
+            type="primary"
+            //  onClick={() => handleChooseTable(table)}
+            className={styles.tableTableBtn}
+          >
+            <p style={{fontSize:'20px'}}>Book</p>
+          </Button>
+        </div>
+      </div>
+      {/* {data?.map((table, index) => (
+
+        // <div className={styles.tableTable} key={index}>
+        //   <h1 style={{ padding: "20px 20px" }}>
+        //     Table {table?.capacity} people
+        //   </h1>
+        //   <div className={styles.tableTableTime}>
+        //     <Button
+        //       type="primary"
+        //       onClick={() => handleChooseTable(table)}
+        //       className={styles.tableTableBtn}
+        //     >
+        //       {table?.timeRangeType}
+        //     </Button>
+        //     <p
+        //       style={{ marginTop: "5px", fontSize: "19px", paddingLeft: "5px" }}
+        //     >
+        //       Price: {table?.depositPrice && table.depositPrice.$numberDecimal}$
+        //     </p>
+        //   </div>
+        // </div>
+      ))} */}
     </div>
   );
 };
