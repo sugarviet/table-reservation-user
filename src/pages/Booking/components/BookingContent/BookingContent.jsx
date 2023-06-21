@@ -6,7 +6,6 @@ import axios from "axios";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
-import { useLocation } from "react-router-dom";
 import dollar from "../../../../assets/dollar.png";
 import people from "../../../../assets/people.png";
 import address from "../../../../assets/pin.png";
