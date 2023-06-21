@@ -7,17 +7,18 @@ import people from "../../../../assets/people.png";
 import styles from "./BookingContent.module.css";
 import { Option } from "antd/es/mentions";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation ,useNavigate} from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { useReservation } from "../../../../services/Reservation/services";
 
 const BookingContent = () => {
   const { mutate } = useReservation();
+  const navigate = useNavigate();
   const location = useLocation();
   const { selectedTable } = location.state;
   const token = localStorage.getItem("token");
   const decodedToken = jwtDecode(token);
-  console.log(selectedTable);
+
   const tables = [
     {
       _id: selectedTable?._id,
@@ -35,6 +36,7 @@ const BookingContent = () => {
         arrivalTime: value.arrivaltime,
       });
       handlePayment();
+      navigate('/')
     } catch (error) {
       console.error(error);
     }
@@ -46,6 +48,7 @@ const BookingContent = () => {
         style={{
           width: 70,
         }}
+        defaultValue='+84'
       >
         <Option value="86">+84</Option>
       </Select>
@@ -60,9 +63,9 @@ const BookingContent = () => {
         currency: "USD", // Example currency
         itemName: "Yummy Pot table reservation", // Example item name
       });
-
       // Redirect the user to the PayPal payment approval URL
       window.location.href = response.data.approvalUrl;
+      
     } catch (error) {
       console.error("Failed to initiate PayPal payment:", error);
       // Handle error
