@@ -1,6 +1,6 @@
 import styles from './ReservationInfor.module.css'
 import { HomeOutlined, UserOutlined } from '@ant-design/icons';
-import { Breadcrumb, Row, Col, Badge, Descriptions, Button } from 'antd';
+import { Breadcrumb, Row, Col, Descriptions } from 'antd';
 import user from '../../../assets/user.png'
 import history from '../../../assets/file.png'
 import table1 from '../../../assets/table1.png'
@@ -13,14 +13,17 @@ import logout from '../../../assets/logout.png'
 import { useState } from 'react';
 import jwtDecode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
+import useGetReservationList from '../hooks/useGetReservationList';
 
 const ReservationInfor = () => {
+  //data of reservation 
+  const { data } = useGetReservationList();
+  console.log(data);
 
   const [active, setActive] = useState(null);
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const decodedToken = jwtDecode(token);
-  console.log(decodedToken.customerId);
   const handleActive = (id) => {
     setActive(id);
     if (id == 2) {
@@ -81,16 +84,17 @@ const ReservationInfor = () => {
                 <h1 style={{ fontSize: '1.3em' }}>Reservation History</h1>
                 <hr style={{ width: '100%', border: '1.5px solid #ffffff', margin: '13px 0 13px 0' }} />
                 <div className={styles.profileContentRight}>
+                  {/* {data?.map(reservation => ( */}
                   <Descriptions title={<h1 style={{ fontSize: '21px' }}><img src={history} style={{ width: '25px', marginRight: '10px' }} />{decodedToken.fullName} </h1>} bordered>
-                    <Descriptions.Item label={<div className={styles.imageProfile}><img src={pin1} style={{ width: '21px', marginRight: '10px' }} /><p style={{fontWeight:'700'}}>Location </p></div>}>Yummy Pot</Descriptions.Item>
-                    <Descriptions.Item label={<div className={styles.imageProfile}><img src={table1} style={{ width: '20px', marginRight: '10px' }} /><p style={{fontWeight:'700'}}>Number table </p></div>}>7</Descriptions.Item>
-                    <Descriptions.Item label={<div className={styles.imageProfile}><img src={people1} style={{ width: '20px', marginRight: '10px' }} /><p style={{fontWeight:'700'}}>Capacity</p></div>}>10</Descriptions.Item>
-                    <Descriptions.Item label={<div className={styles.imageProfile}><img src={dollar1} style={{ width: '20px', marginRight: '10px' }} /><p style={{fontWeight:'700'}}>Price </p></div>}>50$</Descriptions.Item>
-                    <Descriptions.Item label={<div className={styles.imageProfile}><img src={calendar1} style={{ width: '20px', marginRight: '10px' }} /><p style={{fontWeight:'700'}}>Arrival time </p></div>} span={2}>
+                    <Descriptions.Item label={<div className={styles.imageProfile}><img src={pin1} style={{ width: '21px', marginRight: '10px' }} /><p style={{ fontWeight: '700' }}>Location </p></div>}>Yummy Pot</Descriptions.Item>
+                    <Descriptions.Item label={<div className={styles.imageProfile}><img src={table1} style={{ width: '20px', marginRight: '10px' }} /><p style={{ fontWeight: '700' }}>Number table </p></div>}></Descriptions.Item>
+                    <Descriptions.Item label={<div className={styles.imageProfile}><img src={people1} style={{ width: '20px', marginRight: '10px' }} /><p style={{ fontWeight: '700' }}>Capacity</p></div>}>10</Descriptions.Item>
+                    <Descriptions.Item label={<div className={styles.imageProfile}><img src={dollar1} style={{ width: '20px', marginRight: '10px' }} /><p style={{ fontWeight: '700' }}>Price </p></div>}>50$</Descriptions.Item>
+                    <Descriptions.Item label={<div className={styles.imageProfile}><img src={calendar1} style={{ width: '20px', marginRight: '10px' }} /><p style={{ fontWeight: '700' }}>Arrival time </p></div>} span={2}>
                       20-06-2023, 6:00 AM
                     </Descriptions.Item>
-
                   </Descriptions>
+                  {/* ))} */}
                 </div>
               </div>
             </Col>
