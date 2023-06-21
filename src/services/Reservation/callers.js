@@ -7,8 +7,9 @@ const instance = axios.create({
 
 export const reservation = async ({ tables, arrivalTime }) => {
   console.log("dataReservation", { tables, arrivalTime });
-
+  const token = localStorage.getItem("token");
   const res = await instance.post(API_RESERVATION.RESERVATION, {
+    token,
     tables,
     arrivalTime,
   });

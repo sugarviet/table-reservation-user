@@ -28,12 +28,12 @@ const BookingContent = () => {
     },
   ];
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = (value) => {
     try {
       mutate({
         customerId: decodedToken?.customerId,
         tables: tables,
-        arrivalTime: "20-06-2023" + selectedTable?.depositPrice.$numberDecimal,
+        arrivalTime: value.arrivaltime,
       });
       handlePayment();
       navigate('/')
