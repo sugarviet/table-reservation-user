@@ -7,16 +7,15 @@ import people from "../../../../assets/people.png";
 import styles from "./BookingContent.module.css";
 import { Option } from "antd/es/mentions";
 import axios from "axios";
-import { useLocation } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
+import { useLocation } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 import { useReservation } from "../../../../services/Reservation/services";
 
 const BookingContent = () => {
-
   const { mutate } = useReservation();
   const location = useLocation();
   const { selectedTable } = location.state;
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const decodedToken = jwtDecode(token);
   console.log(selectedTable);
   const tables = [
@@ -24,8 +23,8 @@ const BookingContent = () => {
       _id: selectedTable?._id,
       depositAmount: {
         $numberDecimal: "10",
-      }
-    }
+      },
+    },
   ];
 
   const handleFormSubmit = () => {
@@ -35,6 +34,7 @@ const BookingContent = () => {
         tables: tables,
         arrivalTime: "20-06-2023" + selectedTable?.depositPrice.$numberDecimal,
       });
+      handlePayment();
     } catch (error) {
       console.error(error);
     }
@@ -56,7 +56,7 @@ const BookingContent = () => {
     try {
       // Make a request to your backend API to initiate the PayPal payment
       const response = await axios.post("http://localhost:7070/payment/init", {
-        amount: 10.0, // Example amount
+        amount: tables[0].depositAmount.$numberDecimal, // Example amount
         currency: "USD", // Example currency
         itemName: "Yummy Pot table reservation", // Example item name
       });
@@ -71,7 +71,11 @@ const BookingContent = () => {
 
   return (
     <div style={{ textAlign: "center" }}>
-      <Form layout="vertical" onFinish={handleFormSubmit} initialValues={decodedToken}>
+      <Form
+        layout="vertical"
+        onFinish={handleFormSubmit}
+        initialValues={decodedToken}
+      >
         <h1 style={{ paddingTop: "90px", color: "#ffffff" }}>
           Please check your reservation information
         </h1>
@@ -208,7 +212,7 @@ const BookingContent = () => {
               htmlType="submit"
               className={styles.bookingBook}
               type="primary"
-            // onClick={handlePayment}
+              // onClick={handlePayment}
             >
               Booking now
             </Button>

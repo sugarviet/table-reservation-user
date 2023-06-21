@@ -1,17 +1,17 @@
 import { useMutation } from "@tanstack/react-query";
 import { reservation } from "./callers";
 import { notification } from "antd";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export const useReservation = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return useMutation(reservation, {
     onSuccess: () => {
       notification.success({
         message: "Reservation Added",
         description: "The reservation has been added successfully.",
       });
-      navigate('/');
+      // navigate('/');
     },
     onError: () => {
       notification.error({
