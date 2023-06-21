@@ -10,7 +10,6 @@ const HomeTable = ({ data }) => {
     };
     return (
         <div style={{ paddingBottom: '50px' }}>
-
             <hr style={{ width: '60%', textAlign: 'center', margin: '0 auto', marginTop: '100px', marginBottom: '60px' }} />
             <div className={styles.tableTitle}>
                 <h1 >Find {data.length} table suit for your requirements</h1>
@@ -28,7 +27,6 @@ const HomeTable = ({ data }) => {
                         </Button>
                         <p style={{ marginTop: '5px', fontSize: '19px', paddingLeft: '5px' }}>Price: {table?.depositPrice && table.depositPrice.$numberDecimal}$</p>
                     </div>
-
                 </div>
             ))}
         </div>

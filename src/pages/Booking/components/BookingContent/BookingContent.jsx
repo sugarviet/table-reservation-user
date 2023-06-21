@@ -7,9 +7,11 @@ import people from "../../../../assets/people.png";
 import styles from "./BookingContent.module.css";
 import { Option } from "antd/es/mentions";
 import axios from "axios";
-import { useLocation ,useNavigate} from "react-router-dom";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { useReservation } from "../../../../services/Reservation/services";
+import Loading from "../../../../components/Loading/Loading";
 
 const BookingContent = () => {
   const { mutate } = useReservation();
@@ -18,7 +20,7 @@ const BookingContent = () => {
   const { selectedTable } = location.state;
   const token = localStorage.getItem("token");
   const decodedToken = jwtDecode(token);
-
+  const [isLoading, setIsLoading] = useState(false);
   const tables = [
     {
       _id: selectedTable?._id,
@@ -29,6 +31,7 @@ const BookingContent = () => {
   ];
 
   const handleFormSubmit = (value) => {
+    setIsLoading(true);
     try {
       mutate({
         customerId: decodedToken?.customerId,
@@ -36,9 +39,10 @@ const BookingContent = () => {
         arrivalTime: value.arrivaltime,
       });
       handlePayment();
-      navigate('/')
+
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
     }
   };
 
@@ -65,7 +69,6 @@ const BookingContent = () => {
       });
       // Redirect the user to the PayPal payment approval URL
       window.location.href = response.data.approvalUrl;
-      
     } catch (error) {
       console.error("Failed to initiate PayPal payment:", error);
       // Handle error
@@ -73,6 +76,7 @@ const BookingContent = () => {
   };
 
   return (
+
     <div style={{ textAlign: "center" }}>
       <Form
         layout="vertical"
@@ -117,7 +121,7 @@ const BookingContent = () => {
                 padding: "5px 0 0 7px",
               }}
             >
-              20/06/2023, {selectedTable?.timeRangeType}
+              21/06/2023, {selectedTable?.timeRangeType}
             </p>
           </div>
           <div className={styles.bookingDetail}>
@@ -144,6 +148,28 @@ const BookingContent = () => {
         >
           Please provide the contact information used to make your reservation:
         </h1>
+        <div style={{ position: 'relative' }}>
+          {isLoading && (
+            <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 9999,
+            }}
+          >
+              {/* Add your loading spinner or animation here */}
+              <Loading />
+            </div>
+          )}
+          {/* Form content */}
+        </div>
         <div className={styles.bookingContent1}>
           <div className={styles.bookingDetail}>
             <Form.Item
@@ -178,7 +204,7 @@ const BookingContent = () => {
               <Input
                 size="large"
                 style={{ width: "420px" }}
-                defaultValue={"20-06-2023 " + selectedTable?.timeRangeType}
+                defaultValue={"21-06-2023 " + selectedTable?.timeRangeType}
               />
             </Form.Item>
           </div>
@@ -215,7 +241,7 @@ const BookingContent = () => {
               htmlType="submit"
               className={styles.bookingBook}
               type="primary"
-              // onClick={handlePayment}
+            // onClick={handlePayment}
             >
               Booking now
             </Button>
