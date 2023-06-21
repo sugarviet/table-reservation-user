@@ -5,6 +5,7 @@ import { Option } from "antd/es/mentions";
 import axios from "axios";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import styles from './BookingContent.module.css'
 import jwtDecode from "jwt-decode";
 import dollar from "../../../../assets/dollar.png";
 import people from "../../../../assets/people.png";
