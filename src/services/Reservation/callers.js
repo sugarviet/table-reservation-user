@@ -19,7 +19,7 @@ export const reservation = async ({ tables, arrivalTime }) => {
 export const getReservation = async () => {
   console.log("dataReservation");
   const token = localStorage.getItem("token");
-  const res = await instance.get(API_RESERVATION.RESERVATION, {token});
+  const res = await instance.get(API_RESERVATION.GET_RESERVATION, {token});
 
   return res.data;
 };
