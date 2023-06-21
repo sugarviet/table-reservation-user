@@ -1,8 +1,9 @@
-.tableTitle{
+.tableTitle {
     color: #ffffff;
-    font-family: "Roboto",sans-serif;
+    font-family: "Roboto", sans-serif;
 }
-.tableTable{
+
+/* .tableTable{
     box-shadow: 5px 10px;
     font-family: "Roboto",sans-serif;
     background-color: #ffffff;
@@ -15,7 +16,7 @@
     width: 100%;
     margin: 3.25rem auto 0;
     max-width: 900px;
-}
+} */
 .checkboxButton {
     display: inline-block;
     border: 1px solid #d9d9d9;
@@ -25,13 +26,99 @@
     font-size: 14px;
     padding: 6px 12px;
 }
-.tableTableBtn{
+
+/* 
+.tableTableBtn {
     background-color: #BD8E2E;
     width: 100px;
     height: 40px;
     margin-top: 5px;
     margin-right: 20px;
 }
-.tableTableBtn:hover{
+
+.tableTableBtn:hover {
     background-color: #a77a20 !important;
+} */
+
+
+
+.tableTable {
+    /* background-color: #BD8E2E; */
+    background: url(https://accpanel.vn/wp-content/uploads/2020/08/611-1400x700.jpg);
+    filter: drop-shadow(10px 10px 4px #484844);
+    width: 100%;
+    margin: 3.25rem auto 0;
+    border-radius: 0.5rem;
+    max-width: 900px;
+    min-height: 100px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.imgTable {
+    width: 100px;
+    animation: spin 10s linear infinite;
+    margin-left: 50px;
+
+}
+
+.textTable {
+    font-weight: 800;
+    text-shadow: 1px 1px 2px black, 0 0 25px #BD8E2E, 0 0 5px #92660d;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: #e6bf72;
+    font-size: 40px;
+    font-family: 'Courier New', Courier, monospace;
+    position: absolute;
+    ;
+    bottom: 25px;
+    left: 88px;
+}
+
+.textTable1 {
+    margin-left: 10px;
+    margin-top: 18px;
+    font-weight: 800;
+    text-shadow: 1px 1px 2px black, 0 0 25px #BD8E2E, 0 0 5px #92660d;
+    text-shadow: -1px 0 #e6bf72, 0 1px #e6bf72, 1px 0 #e6bf72, 0 -1px #e6bf72;
+    color: #ffffff;
+    font-size: 29px;
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.textTable2 {
+    float: left;
+    margin-left: 10px;
+    font-weight: 800;
+    text-shadow: 1px 1px 2px black, 0 0 25px #BD8E2E, 0 0 5px #92660d;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: #007bff;
+    font-size: 29px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.tableTableBtn {
+    background-color: #007bff;
+    width: 110px;
+    height: 50px;
+    margin-top: 25px;
+    margin-left: 280px;
+}
+
+.tableTableBtn:hover {
+    background-color: #036fe3 !important;
 }
