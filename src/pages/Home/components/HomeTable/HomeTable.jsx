@@ -32,12 +32,13 @@ const HomeTable = ({ data }) => {
           <br /> you can pick up more time at below
         </p>
       </div>
-      <div className={styles.tableTable}>
+      {data?.map((table, index) => (
+      <div className={styles.tableTable} key={index}>
         <img className={styles.imgTable} src={dish} />
         <h1 className={styles.textTable}>7</h1>
         <div>
           <h1 className={styles.textTable1}>
-            Table For 10 People
+            Table For {table?.capacity} People
           </h1>
           <p className={styles.textTable2}>10$</p>
         </div>
@@ -47,10 +48,11 @@ const HomeTable = ({ data }) => {
             //  onClick={() => handleChooseTable(table)}
             className={styles.tableTableBtn}
           >
-            <p style={{fontSize:'20px'}}>Book</p>
+            <p style={{fontSize:'20px'}}>{table?.timeRangeType}</p>
           </Button>
         </div>
       </div>
+       ))}
       {/* {data?.map((table, index) => (
 
         // <div className={styles.tableTable} key={index}>
