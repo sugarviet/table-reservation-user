@@ -5,7 +5,7 @@ import { Option } from "antd/es/mentions";
 import axios from "axios";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import styles from './BookingContent.module.css'
+import styles from "./BookingContent.module.css";
 import jwtDecode from "jwt-decode";
 import dollar from "../../../../assets/dollar.png";
 import people from "../../../../assets/people.png";
@@ -29,16 +29,20 @@ const BookingContent = () => {
     },
   ];
 
-  const handleFormSubmit = (value) => {
+  const handleFormSubmit = async (value) => {
+    console.log(value);
     setIsLoading(true);
     try {
-      mutate({
+      await handlePayment({
         customerId: decodedToken?.customerId,
         tables: tables,
-        arrivalTime: value.arrivaltime,
+        arrivalTime: value.arrivalTime,
       });
-      handlePayment();
-
+      // mutate({
+      //   customerId: decodedToken?.customerId,
+      //   tables: tables,
+      //   arrivalTime: value.arrivalTime,
+      // });
     } catch (error) {
       console.error(error);
       setIsLoading(false);
@@ -51,21 +55,29 @@ const BookingContent = () => {
         style={{
           width: 70,
         }}
-        defaultValue='+84'
+        defaultValue="+84"
       >
         <Option value="86">+84</Option>
       </Select>
     </Form.Item>
   );
 
-  const handlePayment = async () => {
+  const handlePayment = async ({ customerId, tables, arrivalTime }) => {
     try {
       // Make a request to your backend API to initiate the PayPal payment
-      const response = await axios.post("http://localhost:7070/payment/init", {
-        amount: tables[0].depositAmount.$numberDecimal, // Example amount
-        currency: "USD", // Example currency
-        itemName: "Yummy Pot table reservation", // Example item name
-      });
+      const response = await axios.post(
+        "http://localhost:7070/payment/init",
+        {
+          amount: tables[0].depositAmount.$numberDecimal, // Example amount
+          currency: "USD", // Example currency
+          itemName: "Yummy Pot table reservation", // Example item name
+          tables,
+          arrivalTime,
+        },
+        {
+          withCredentials: true,
+        }
+      );
       // Redirect the user to the PayPal payment approval URL
       window.location.href = response.data.approvalUrl;
     } catch (error) {
@@ -75,7 +87,6 @@ const BookingContent = () => {
   };
 
   return (
-
     <div style={{ textAlign: "center" }}>
       <Form
         layout="vertical"
@@ -147,22 +158,22 @@ const BookingContent = () => {
         >
           Please provide the contact information used to make your reservation:
         </h1>
-        <div style={{ position: 'relative' }}>
+        <div style={{ position: "relative" }}>
           {isLoading && (
             <div
-            style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              zIndex: 9999,
-            }}
-          >
+              style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                zIndex: 9999,
+              }}
+            >
               {/* Add your loading spinner or animation here */}
               <Loading />
             </div>
@@ -239,7 +250,7 @@ const BookingContent = () => {
               htmlType="submit"
               className={styles.bookingBook}
               type="primary"
-            // onClick={handlePayment}
+              // onClick={handlePayment}
             >
               Booking now
             </Button>

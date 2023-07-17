@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import styles from "./HomeTable.module.css";
-import dish from '../../../../assets/dish.png'
+import dish from "../../../../assets/dish.png";
 const HomeTable = ({ data }) => {
   const navigate = useNavigate();
   const handleChooseTable = (table) => {
@@ -32,25 +32,27 @@ const HomeTable = ({ data }) => {
           <br /> you can pick up more time at below
         </p>
       </div>
-      <div className={styles.tableTable}>
-        <img className={styles.imgTable} src={dish} />
-        <h1 className={styles.textTable}>7</h1>
-        <div>
-          <h1 className={styles.textTable1}>
-            Table For 10 People
-          </h1>
-          <p className={styles.textTable2}>10$</p>
+      {data?.map((table, index) => (
+        <div className={styles.tableTable} key={index}>
+          <img className={styles.imgTable} src={dish} />
+          <h1 className={styles.textTable}>7</h1>
+          <div>
+            <h1 className={styles.textTable1}>
+              Table For {table?.capacity} People
+            </h1>
+            <p className={styles.textTable2}>10$</p>
+          </div>
+          <div className={styles.tableTableTime}>
+            <Button
+              type="primary"
+              //  onClick={() => handleChooseTable(table)}
+              className={styles.tableTableBtn}
+            >
+              <p style={{ fontSize: "20px" }}>{table?.timeRangeType}</p>
+            </Button>
+          </div>
         </div>
-        <div className={styles.tableTableTime}>
-          <Button
-            type="primary"
-            //  onClick={() => handleChooseTable(table)}
-            className={styles.tableTableBtn}
-          >
-            <p style={{fontSize:'20px'}}>Book</p>
-          </Button>
-        </div>
-      </div>
+      ))}
       {/* {data?.map((table, index) => (
 
         // <div className={styles.tableTable} key={index}>

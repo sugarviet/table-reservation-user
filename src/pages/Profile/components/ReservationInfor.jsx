@@ -1,6 +1,6 @@
 import styles from "./ReservationInfor.module.css";
 import { HomeOutlined, UserOutlined } from "@ant-design/icons";
-import { Breadcrumb, Row, Col, Descriptions } from "antd";
+import { Breadcrumb, Row, Col, Descriptions, Button } from "antd";
 import user from "../../../assets/user.png";
 import history from "../../../assets/file.png";
 import table1 from "../../../assets/table1.png";
@@ -14,19 +14,35 @@ import { useState } from "react";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import useGetReservationList from "../hooks/useGetReservationList";
+import { useLogOut } from "../../../services/Logout/services";
+import { useCancelReservation } from "../../../services/Reservation/services";
 
 const ReservationInfor = () => {
   //data of reservation
   const { data } = useGetReservationList();
-  console.log("dataFirst", data);
+  const { mutate } = useLogOut();
 
   const [active, setActive] = useState(null);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const decodedToken = jwtDecode(token);
+  const { mutate: cancelReservation } = useCancelReservation();
+  const currentDate = new Date(Date.now());
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = String(currentDate.getMonth() + 1).padStart(2, "0");
+  const currentDay = String(currentDate.getDate()).padStart(2, "0");
+
+  const formattedDate = `${currentYear}/${currentMonth}/${currentDay}`;
+  console.log(formattedDate);
+  const handleCancelReservation = (reservation) => {
+    cancelReservation({
+      reservationId: reservation._id,
+    });
+  };
   const handleActive = (id) => {
     setActive(id);
     if (id == 2) {
+      mutate();
       localStorage.removeItem("token");
       navigate("/login");
     }
@@ -145,7 +161,7 @@ const ReservationInfor = () => {
                   }}
                 />
                 <div className={styles.profileContentRight}>
-                  <div style={{display:'flex',flexDirection:"row"}}>
+                  <div style={{ display: "flex", flexDirection: "row" }}>
                     <img
                       src={history}
                       style={{ width: "35px", marginRight: "10px" }}
@@ -153,79 +169,204 @@ const ReservationInfor = () => {
                     <h1>{decodedToken.fullName}</h1>
                   </div>
                   {data?.map((reservation) => (
-                    <Descriptions
-                      title={
-                        <h1 style={{ fontSize: "21px", marginBottom: '17px' }}>
-                          {" "}
-                        </h1>
-                      }
-                      bordered
-                    >
-                      <Descriptions.Item
-                        label={
-                          <div className={styles.imageProfile}>
-                            <img
-                              src={pin1}
-                              style={{ width: "21px", marginRight: "10px" }}
-                            />
-                            <p style={{ fontWeight: "700" }}>Location </p>
-                          </div>
+                    <div>
+                      <Descriptions
+                        title={
+                          <h1
+                            style={{ fontSize: "21px", marginBottom: "17px" }}
+                          >
+                            {" "}
+                          </h1>
                         }
+                        bordered
                       >
-                        Yummy Pot
-                      </Descriptions.Item>
-                      <Descriptions.Item
-                        label={
-                          <div className={styles.imageProfile}>
-                            <img
-                              src={table1}
-                              style={{ width: "20px", marginRight: "10px" }}
-                            />
-                            <p style={{ fontWeight: "700" }}>Number table </p>
+                        <Descriptions.Item
+                          label={
+                            <div className={styles.imageProfile}>
+                              <img
+                                src={pin1}
+                                style={{ width: "21px", marginRight: "10px" }}
+                              />
+                              <p style={{ fontWeight: "700" }}>Location </p>
+                            </div>
+                          }
+                        >
+                          Yummy Pot
+                        </Descriptions.Item>
+                        <Descriptions.Item
+                          label={
+                            <div className={styles.imageProfile}>
+                              <img
+                                src={table1}
+                                style={{ width: "20px", marginRight: "10px" }}
+                              />
+                              <p style={{ fontWeight: "700" }}>Number table </p>
+                            </div>
+                          }
+                        ></Descriptions.Item>
+                        <Descriptions.Item
+                          label={
+                            <div className={styles.imageProfile}>
+                              <img
+                                src={people1}
+                                style={{ width: "20px", marginRight: "10px" }}
+                              />
+                              <p style={{ fontWeight: "700" }}>Capacity</p>
+                            </div>
+                          }
+                        >
+                          10
+                        </Descriptions.Item>
+                        <Descriptions.Item
+                          label={
+                            <div className={styles.imageProfile}>
+                              <img
+                                src={dollar1}
+                                style={{ width: "20px", marginRight: "10px" }}
+                              />
+                              <p style={{ fontWeight: "700" }}>Price </p>
+                            </div>
+                          }
+                        >
+                          {reservation.depositAmount.$numberDecimal}$
+                        </Descriptions.Item>
+                        <Descriptions.Item
+                          label={
+                            <div className={styles.imageProfile}>
+                              <img
+                                src={calendar1}
+                                style={{ width: "20px", marginRight: "10px" }}
+                              />
+                              <p style={{ fontWeight: "700" }}>Arrival time </p>
+                            </div>
+                          }
+                          span={2}
+                        >
+                          {reservation.arrivalTime}
+                        </Descriptions.Item>
+                      </Descriptions>
+                      {/* Nếu như đã cancel thì cập nhật lại nút bấm */}
+                      {reservation.isCancelled ? (
+                        <div>
+                          <p
+                            style={{
+                              marginBottom: "30px",
+                              display: "flex",
+                              justifyContent: "flex-end",
+                              marginTop: "5px",
+                              color: "red",
+                              fontWeight: "500",
+                            }}
+                          >
+                            <p
+                              style={{
+                                fontWeight: "500",
+                                display: "block",
+                                paddingRight: "5px",
+                              }}
+                            >
+                              Note:
+                            </p>
+                            Your Reservation Has Been Canceled.
+                          </p>
+                        </div>
+                      ) : (
+                        <div>
+                          {(Date.now() -
+                            new Date(
+                              reservation.createdAt.split("T")[0]
+                            ).getTime()) /
+                            3600000 >
+                          24 ? (
+                            <div
+                              style={{
+                                marginTop: "20px",
+                                display: "flex",
+                                justifyContent: "flex-end",
+                              }}
+                            >
+                              <Button
+                                key="approve"
+                                type="primary"
+                                style={{
+                                  background: "rgb(221,214,197)",
+                                  color: "black",
+                                }}
+                                disabled={true}
+                              >
+                                Out Of Date
+                              </Button>
+                            </div>
+                          ) : (
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "flex-end",
+                                marginTop: "20px",
+                              }}
+                            >
+                              <Button
+                                key="approve"
+                                type="primary"
+                                style={{
+                                  background: "rgb(221,214,197)",
+                                  color: "black",
+                                }}
+                                onClick={() =>
+                                  handleCancelReservation(reservation)
+                                }
+                                disabled={
+                                  new Date().setHours(
+                                    Number(
+                                      reservation.tables[0].table.timeRangeType.split(
+                                        "h"
+                                      )[0]
+                                    )
+                                  ) -
+                                    Date.now() <
+                                  61 * 60 * 1000
+                                    ? true
+                                    : false
+                                }
+                              >
+                                Reject
+                              </Button>
+                            </div>
+                          )}
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "flex-end",
+                              marginTop: "10px",
+                            }}
+                          >
+                            <div>
+                              <p
+                                style={{
+                                  marginBottom: "30px",
+                                  display: "flex",
+                                  justifyContent: "flex-end",
+                                  marginTop: "5px",
+                                  fontWeight: "500",
+                                }}
+                              >
+                                <p
+                                  style={{
+                                    fontWeight: "500",
+                                    display: "block",
+                                    paddingRight: "5px",
+                                  }}
+                                >
+                                  Note:
+                                </p>
+                                You Cannot Cancel The Order Within A 60-minute
+                                Time Frame.
+                              </p>
+                            </div>
                           </div>
-                        }
-                      ></Descriptions.Item>
-                      <Descriptions.Item
-                        label={
-                          <div className={styles.imageProfile}>
-                            <img
-                              src={people1}
-                              style={{ width: "20px", marginRight: "10px" }}
-                            />
-                            <p style={{ fontWeight: "700" }}>Capacity</p>
-                          </div>
-                        }
-                      >
-                        10
-                      </Descriptions.Item>
-                      <Descriptions.Item
-                        label={
-                          <div className={styles.imageProfile}>
-                            <img
-                              src={dollar1}
-                              style={{ width: "20px", marginRight: "10px" }}
-                            />
-                            <p style={{ fontWeight: "700" }}>Price </p>
-                          </div>
-                        }
-                      >
-                        {reservation.depositAmount.$numberDecimal}$
-                      </Descriptions.Item>
-                      <Descriptions.Item
-                        label={
-                          <div className={styles.imageProfile}>
-                            <img
-                              src={calendar1}
-                              style={{ width: "20px", marginRight: "10px" }}
-                            />
-                            <p style={{ fontWeight: "700" }}>Arrival time </p>
-                          </div>
-                        }
-                        span={2}
-                      >
-                        {reservation.arrivalTime}
-                      </Descriptions.Item>
-                    </Descriptions>
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
               </div>

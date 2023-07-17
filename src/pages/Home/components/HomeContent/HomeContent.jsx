@@ -7,15 +7,17 @@ import { useState } from "react";
 import axios from "axios";
 import Loading from "../../../../components/Loading/Loading";
 import EmptyData from "../../../../components/EmptyData/EmptyData";
+import moment from "moment";
 
 const HomeContent = () => {
   onFinish;
-
+  const { Option } = Select;
   const [data, setData] = useState(null);
   const [capacity, setCapacity] = useState(0);
   const [timeRangeType, setTimeRangeType] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(moment(Date.now()));
 
   const handleFormSubmit = async () => {
     try {
@@ -77,42 +79,47 @@ const HomeContent = () => {
             </div>
             <div className={styles.homeChoose}>
               <p className={styles.homeTitleChoose}>Date</p>
-              {/* <Form.Item>
-                <DatePicker bordered={false} />
-              </Form.Item> */}
-              <DatePicker bordered={false} />
+              <DatePicker bordered={false} value={selectedDate} disabled />
             </div>
             <div className={styles.homeChoose}>
               <p className={styles.homeTitleChoose}>Time</p>
               <Form.Item>
                 <Space wrap>
                   <Select
-                    // mode="multiple"
                     value={undefined}
                     placeholder="Select time range"
                     style={{ width: 150, color: "#000000" }}
                     bordered={false}
-                    options={[
-                      {
-                        value: "6h",
-                        label: "6:00",
-                      },
-                      {
-                        value: "8h",
-                        label: "8:00",
-                      },
-                      {
-                        value: "10h",
-                        label: "10:00",
-                      },
-                    ]}
                     onChange={(value) => setTimeRangeType(value)}
                   >
-                    {/* {plainOptions.map((option) => (
-                      <Option key={option} value={option}>
-                        {option}
+                    {[
+                      {
+                        value: "18h",
+                        label: "24:00",
+                      },
+                      {
+                        value: "20h",
+                        label: "20:00",
+                      },
+                      {
+                        value: "22h",
+                        label: "22:00",
+                      },
+                    ].map((option) => (
+                      <Option
+                        key={option.value}
+                        value={option.value}
+                        disabled={
+                          new Date().setHours(
+                            Number(option.label.split(":")[0])
+                          ) -
+                            Date.now() <
+                          1 * 60 * 1000
+                        }
+                      >
+                        {option.label}
                       </Option>
-                    ))} */}
+                    ))}
                   </Select>
                 </Space>
               </Form.Item>
@@ -127,15 +134,6 @@ const HomeContent = () => {
           </div>
         </Form>
       </div>
-      {/* <div className={styles.homeInfor}>
-        <h1>Find table for you</h1>
-        <p style={{ fontSize: "20px", marginTop: "10px" }}>
-          Given your specific preferences, we will make recommendations to suit
-          your requirements
-        </p>
-        <h1 style={{ marginTop: "10px" }}> Or</h1>
-        <h1 style={{ marginTop: "10px" }}>Call us : 098123320</h1>
-      </div> */}
       {isLoading ? (
         <Loading />
       ) : isFormSubmitted ? (
