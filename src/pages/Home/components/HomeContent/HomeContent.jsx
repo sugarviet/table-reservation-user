@@ -64,8 +64,8 @@ const HomeContent = () => {
                         label: "4 people",
                       },
                       {
-                        value: "8",
-                        label: "8 people",
+                        value: "6",
+                        label: "6 people",
                       },
                       {
                         value: "10",
@@ -94,16 +94,16 @@ const HomeContent = () => {
                   >
                     {[
                       {
-                        value: "18h",
-                        label: "24:00",
+                        value: "12h",
+                        label: "12:00",
                       },
                       {
-                        value: "20h",
-                        label: "20:00",
+                        value: "14h",
+                        label: "14:00",
                       },
                       {
-                        value: "22h",
-                        label: "22:00",
+                        value: "16h",
+                        label: "16:00",
                       },
                     ].map((option) => (
                       <Option
