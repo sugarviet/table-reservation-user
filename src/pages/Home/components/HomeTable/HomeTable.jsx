@@ -45,7 +45,7 @@ const HomeTable = ({ data }) => {
           <div className={styles.tableTableTime}>
             <Button
               type="primary"
-              //  onClick={() => handleChooseTable(table)}
+              onClick={() => handleChooseTable(table)}
               className={styles.tableTableBtn}
             >
               <p style={{ fontSize: "20px" }}>{table?.timeRangeType}</p>
