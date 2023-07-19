@@ -4,7 +4,7 @@ import calendar from "../../../../assets/calendar.png";
 import { Option } from "antd/es/mentions";
 import axios from "axios";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { redirect, useLocation } from "react-router-dom";
 import styles from "./BookingContent.module.css";
 import jwtDecode from "jwt-decode";
 import dollar from "../../../../assets/dollar.png";
@@ -20,6 +20,12 @@ const BookingContent = () => {
   const token = localStorage.getItem("token");
   const decodedToken = jwtDecode(token);
   const [isLoading, setIsLoading] = useState(false);
+  const currentDate = new Date(Date.now());
+  const day = currentDate.getDate().toString().padStart(2, "0");
+  const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+  const year = currentDate.getFullYear().toString();
+
+  const formattedDate = `${day}/${month}/${year}`;
   const tables = [
     {
       _id: selectedTable?._id,
@@ -30,7 +36,7 @@ const BookingContent = () => {
   ];
 
   const handleFormSubmit = async (value) => {
-    console.log(value);
+    console.log(value.arrivalTime);
     setIsLoading(true);
     try {
       await handlePayment({
@@ -38,11 +44,7 @@ const BookingContent = () => {
         tables: tables,
         arrivalTime: value.arrivalTime,
       });
-      // mutate({
-      //   customerId: decodedToken?.customerId,
-      //   tables: tables,
-      //   arrivalTime: value.arrivalTime,
-      // });
+      redirect("/");
     } catch (error) {
       console.error(error);
       setIsLoading(false);
@@ -131,7 +133,7 @@ const BookingContent = () => {
                 padding: "5px 0 0 7px",
               }}
             >
-              21/06/2023, {selectedTable?.timeRangeType}
+              {formattedDate}
             </p>
           </div>
           <div className={styles.bookingDetail}>
@@ -213,7 +215,7 @@ const BookingContent = () => {
               <Input
                 size="large"
                 style={{ width: "420px" }}
-                defaultValue={"21-06-2023 " + selectedTable?.timeRangeType}
+                defaultValue={selectedTable?.timeRangeType}
               />
             </Form.Item>
           </div>

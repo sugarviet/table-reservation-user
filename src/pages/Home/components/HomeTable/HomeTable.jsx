@@ -5,7 +5,13 @@ import dish from "../../../../assets/dish.png";
 const HomeTable = ({ data }) => {
   const navigate = useNavigate();
   const handleChooseTable = (table) => {
-    navigate("/booking", { state: { selectedTable: table } });
+    const token = localStorage.getItem("token");
+    console.log(token);
+    if (token != null) {
+      navigate("/booking", { state: { selectedTable: table } });
+    } else {
+      navigate("/login");
+    }
   };
   return (
     <div style={{ paddingBottom: "50px" }}>
