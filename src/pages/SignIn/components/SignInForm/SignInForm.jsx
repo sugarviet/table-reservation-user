@@ -23,7 +23,7 @@ const SignInForm = () => {
     <Row>
       <Col span={12}>
         <Link to="/">
-          <img src={login} style={{ width: '750px' }} />
+          <img src={login} style={{ width: '750px', minHeight: 'calc(100vh - 3px)' }} />
         </Link>
       </Col>
       <Col span={12}>
@@ -37,7 +37,7 @@ const SignInForm = () => {
             cover={
               <img
                 alt="example"
-                src="https://m.media-amazon.com/images/G/01/Lagoon/AssetLibrary/MyAccount/Login/Banner_Mobile_US_Login10.png"
+                src="https://png.pngtree.com/illustrations/20190325/ourlarge/pngtree-winter-warm-hot-pot-food-png-image_37651.jpg"
               />
             }
           >
@@ -105,13 +105,13 @@ const SignInForm = () => {
               </Form.Item>
               <Row>
                 <Col span={24}>
-                  <Form.Item>
+                  <Form.Item style={{textAlign: 'center'}}>
                     <Link className={style.loginRegisterTagLink} to="/signup">
                       Register now!
                     </Link>
-                    <a className={style.loginForgot} href="">
+                    {/* <a className={style.loginForgot} href="">
                       Forgot password
-                    </a>
+                    </a> */}
                   </Form.Item>
                 </Col>
               </Row>

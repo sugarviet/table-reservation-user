@@ -118,7 +118,7 @@
 }
 
 .tableTableBtn {
-    background-color: #007bff;
+    background-color: #BD8E2E;
     width: 110px;
     height: 50px;
     margin-top: 25px;
@@ -126,5 +126,5 @@
 }
 
 .tableTableBtn:hover {
-    background-color: #036fe3 !important;
+    background-color: #af832d !important;
 }

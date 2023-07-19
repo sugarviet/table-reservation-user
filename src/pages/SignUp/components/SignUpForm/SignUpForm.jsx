@@ -90,7 +90,7 @@ const SignUpForm = () => {
     <Row className={style.daddyContainer}>
       <Col span={12}>
         <Link to="/">
-          <img src={login} style={{ width: '750px' }} />
+          <img src={login} style={{ width: '750px', minHeight: 'calc(100vh - 3px)' }} />
         </Link>
       </Col>
       <Col span={12}>
@@ -104,7 +104,7 @@ const SignUpForm = () => {
             cover={
               <img
                 alt="signup"
-                src="https://miro.medium.com/freeze/fit/c/80/56/1*BJHpzKGCqf7TrVQb96656Q.gif"
+                src="https://png.pngtree.com/illustrations/20190325/ourlarge/pngtree-winter-warm-hot-pot-food-png-image_37651.jpg"
               />
             }
           >
@@ -233,8 +233,8 @@ const SignUpForm = () => {
                   I have read the <a href="">agreement</a>
                 </Checkbox>
               </Form.Item> */}
-              <Form.Item className={style.buttonSubmit} {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">
+              <Form.Item className={style.formButton} {...tailFormItemLayout}>
+                <Button type="primary" htmlType="submit" className={style.formButton}>
                   Register
                 </Button>
               </Form.Item>
