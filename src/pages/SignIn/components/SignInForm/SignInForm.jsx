@@ -3,11 +3,10 @@ import { Button, Card, Checkbox, Col, Form, Input, Row } from "antd";
 import style from "./SignInForm.module.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import login from '../../../../assets/login.png'
+import login from "../../../../assets/login.png";
 import { useLogin } from "../../../../services/Login/services";
 
 const SignInForm = () => {
-
   const { mutate } = useLogin();
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -109,9 +108,6 @@ const SignInForm = () => {
                     <Link className={style.loginRegisterTagLink} to="/signup">
                       Register now!
                     </Link>
-                    {/* <a className={style.loginForgot} href="">
-                      Forgot password
-                    </a> */}
                   </Form.Item>
                 </Col>
               </Row>

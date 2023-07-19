@@ -13,7 +13,12 @@ export const useLogin = () => {
       });
       navigate("/");
     },
-    onError: () => {
+    onError: (error) => {
+      if (error.response.status === 404) {
+        return notification.error({
+          message: error.response.data.message,
+        });
+      }
       notification.error({
         message: "Login failed",
       });
