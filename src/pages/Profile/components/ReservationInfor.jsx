@@ -10,7 +10,7 @@ import dollar1 from "../../../assets/dollar1.png";
 import calendar1 from "../../../assets/calendar1.png";
 
 import logout from "../../../assets/logout.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import useGetReservationList from "../hooks/useGetReservationList";
@@ -18,22 +18,20 @@ import { useLogOut } from "../../../services/Logout/services";
 import { useCancelReservation } from "../../../services/Reservation/services";
 
 const ReservationInfor = () => {
-  //data of reservation
   const { data } = useGetReservationList();
   const { mutate } = useLogOut();
-
   const [active, setActive] = useState(null);
+  let decodedToken = null;
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
-  const decodedToken = jwtDecode(token);
   const { mutate: cancelReservation } = useCancelReservation();
-  const currentDate = new Date(Date.now());
-  const currentYear = currentDate.getFullYear();
-  const currentMonth = String(currentDate.getMonth() + 1).padStart(2, "0");
-  const currentDay = String(currentDate.getDate()).padStart(2, "0");
-
-  const formattedDate = `${currentYear}/${currentMonth}/${currentDay}`;
-  console.log(formattedDate);
+  useEffect(() => {
+    let decodedToken = null;
+    if (localStorage.getItem("token") != null) {
+      decodedToken = jwtDecode(localStorage.getItem("token"));
+    } else {
+      navigate("/login");
+    }
+  }, [navigate]);
   const handleCancelReservation = (reservation) => {
     cancelReservation({
       reservationId: reservation._id,
@@ -43,11 +41,8 @@ const ReservationInfor = () => {
     setActive(id);
     if (id == 2) {
       mutate();
-      localStorage.removeItem("token");
-      navigate("/login");
     }
   };
-
   return (
     <div style={{ paddingTop: "100px" }}>
       <Breadcrumb style={{ paddingLeft: "158px" }} separator=">">
@@ -99,7 +94,7 @@ const ReservationInfor = () => {
                         paddingTop: "5px",
                       }}
                     >
-                      {decodedToken.fullName}
+                      {decodedToken?.fullName}
                     </h1>
                   </div>
                   <div
@@ -166,7 +161,7 @@ const ReservationInfor = () => {
                       src={history}
                       style={{ width: "35px", marginRight: "10px" }}
                     />
-                    <h1>{decodedToken.fullName}</h1>
+                    <h1>{decodedToken?.fullName}</h1>
                   </div>
                   {data?.map((reservation) => (
                     <div>
@@ -174,9 +169,7 @@ const ReservationInfor = () => {
                         title={
                           <h1
                             style={{ fontSize: "21px", marginBottom: "17px" }}
-                          >
-                            {" "}
-                          </h1>
+                          ></h1>
                         }
                         bordered
                       >
@@ -203,7 +196,9 @@ const ReservationInfor = () => {
                               <p style={{ fontWeight: "700" }}>Number table </p>
                             </div>
                           }
-                        ></Descriptions.Item>
+                        >
+                          {reservation.tables[0].table.tableNumber}
+                        </Descriptions.Item>
                         <Descriptions.Item
                           label={
                             <div className={styles.imageProfile}>
@@ -215,7 +210,7 @@ const ReservationInfor = () => {
                             </div>
                           }
                         >
-                          10
+                          {reservation.tables[0].table.capacity}
                         </Descriptions.Item>
                         <Descriptions.Item
                           label={
@@ -243,6 +238,32 @@ const ReservationInfor = () => {
                           span={2}
                         >
                           {reservation.arrivalTime}
+                        </Descriptions.Item>
+                        <Descriptions.Item
+                          label={
+                            <div className={styles.imageProfile}>
+                              <img
+                                src={table1}
+                                style={{ width: "20px", marginRight: "10px" }}
+                              />
+                              <p style={{ fontWeight: "700" }}>FullName </p>
+                            </div>
+                          }
+                        >
+                          {reservation.fullName}
+                        </Descriptions.Item>
+                        <Descriptions.Item
+                          label={
+                            <div className={styles.imageProfile}>
+                              <img
+                                src={table1}
+                                style={{ width: "20px", marginRight: "10px" }}
+                              />
+                              <p style={{ fontWeight: "700" }}>Phone </p>
+                            </div>
+                          }
+                        >
+                          {reservation.phone}
                         </Descriptions.Item>
                       </Descriptions>
                       {/* Nếu như đã cancel thì cập nhật lại nút bấm */}
@@ -348,6 +369,7 @@ const ReservationInfor = () => {
                                   justifyContent: "flex-end",
                                   marginTop: "5px",
                                   fontWeight: "500",
+                                  color: "red",
                                 }}
                               >
                                 <p
@@ -355,6 +377,7 @@ const ReservationInfor = () => {
                                     fontWeight: "500",
                                     display: "block",
                                     paddingRight: "5px",
+                                    color: "black",
                                   }}
                                 >
                                   Note:

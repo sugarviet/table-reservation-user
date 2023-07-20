@@ -6,7 +6,6 @@ const HomeTable = ({ data }) => {
   const navigate = useNavigate();
   const handleChooseTable = (table) => {
     const token = localStorage.getItem("token");
-    console.log(token);
     if (token != null) {
       navigate("/booking", { state: { selectedTable: table } });
     } else {
@@ -26,16 +25,19 @@ const HomeTable = ({ data }) => {
       />
       <div className={styles.tableTitle}>
         <h1>Find {data.length} table suit for your requirements</h1>
-        {/* <p style={{ fontSize: '19px', paddingTop: '25px' }}>Table is available at 8:00, 18-06-2023, table for 4 people.</p> */}
         <p style={{ fontSize: "19px", paddingTop: "3px", color: "#F75A41" }}>
           * Note about reservation time
         </p>
-        <p style={{ fontSize: "17px", paddingTop: "3px" }}>
-          - Just keep your table in 15 minutes.
+        <p style={{ fontSize: "17px", paddingTop: "3px", fontWeight: 600 }}>
+          - Please reserve a table now as the number of reservations is limited.
         </p>
-        <p style={{ fontSize: "17px", paddingTop: "3px" }}>
-          - If you want to choose more time to your dinner,
-          <br /> you can pick up more time at below
+        <p style={{ fontSize: "17px", paddingTop: "3px", fontWeight: 600 }}>
+          - If you want to choose more time to your dinner or book for more
+          people.
+        </p>
+        <p>
+          Please contact the following phone number
+          <br /> 0344350704
         </p>
       </div>
       {data?.map((table, index) => (
@@ -60,28 +62,6 @@ const HomeTable = ({ data }) => {
           </div>
         </div>
       ))}
-      {/* {data?.map((table, index) => (
-
-        // <div className={styles.tableTable} key={index}>
-        //   <h1 style={{ padding: "20px 20px" }}>
-        //     Table {table?.capacity} people
-        //   </h1>
-        //   <div className={styles.tableTableTime}>
-        //     <Button
-        //       type="primary"
-        //       onClick={() => handleChooseTable(table)}
-        //       className={styles.tableTableBtn}
-        //     >
-        //       {table?.timeRangeType}
-        //     </Button>
-        //     <p
-        //       style={{ marginTop: "5px", fontSize: "19px", paddingLeft: "5px" }}
-        //     >
-        //       Price: {table?.depositPrice && table.depositPrice.$numberDecimal}$
-        //     </p>
-        //   </div>
-        // </div>
-      ))} */}
     </div>
   );
 };

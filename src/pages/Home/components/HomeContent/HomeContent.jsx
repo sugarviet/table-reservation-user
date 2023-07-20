@@ -44,6 +44,11 @@ const HomeContent = () => {
     <div className={styles.homeContent}>
       <h1 className={styles.homeHeader}>Table Reservation Online</h1>
       <p className={styles.homeDes}>Book your table early at our restaurant</p>
+      {new Date().setHours(Number(16)) - Date.now() < 14 * 60 * 1000 && (
+        <p className={styles.closeOption}>
+          Our restaurant is closed now, see you tomorrow!
+        </p>
+      )}
       <div className={styles.homeSearch}>
         <Form className={styles.homeForm} onFinish={handleFormSubmit}>
           <div className={styles.homeGroup}>
@@ -114,7 +119,7 @@ const HomeContent = () => {
                             Number(option.label.split(":")[0])
                           ) -
                             Date.now() <
-                          1 * 60 * 1000
+                          15 * 60 * 1000
                         }
                       >
                         {option.label}
@@ -125,7 +130,13 @@ const HomeContent = () => {
               </Form.Item>
             </div>
 
-            <Button className={styles.homeBtn} htmlType="submit">
+            <Button
+              className={styles.homeBtn}
+              htmlType="submit"
+              disabled={
+                new Date().setHours(Number(16)) - Date.now() < 14 * 60 * 1000
+              }
+            >
               <div className={styles.homeChoose1}>
                 <img style={{ width: "30px" }} src={Search}></img>
                 <p className={styles.homeSearchTxt}>Search</p>

@@ -36,12 +36,13 @@ const BookingContent = () => {
   ];
 
   const handleFormSubmit = async (value) => {
-    console.log(value.arrivalTime);
     setIsLoading(true);
     try {
       await handlePayment({
         customerId: decodedToken?.customerId,
         tables: tables,
+        fullName: value.fullName,
+        phoneReserve: value.phone,
         arrivalTime: value.arrivalTime,
       });
       redirect("/");
@@ -64,7 +65,13 @@ const BookingContent = () => {
     </Form.Item>
   );
 
-  const handlePayment = async ({ customerId, tables, arrivalTime }) => {
+  const handlePayment = async ({
+    customerId,
+    tables,
+    arrivalTime,
+    fullName,
+    phoneReserve,
+  }) => {
     try {
       // Make a request to your backend API to initiate the PayPal payment
       const response = await axios.post(
@@ -74,6 +81,8 @@ const BookingContent = () => {
           currency: "USD", // Example currency
           itemName: "Yummy Pot table reservation", // Example item name
           tables,
+          fullName,
+          phoneReserve,
           arrivalTime,
         },
         {
@@ -93,7 +102,10 @@ const BookingContent = () => {
       <Form
         layout="vertical"
         onFinish={handleFormSubmit}
-        initialValues={decodedToken}
+        initialValues={{
+          ...decodedToken,
+          arrivalTime: selectedTable?.timeRangeType,
+        }}
       >
         <h1 style={{ paddingTop: "90px", color: "#ffffff" }}>
           Please check your reservation information
