@@ -210,7 +210,7 @@ const ReservationInfor = () => {
                             <div className={styles.imageProfile}>
                               <img
                                 src={table1}
-                                style={{ width: "20px", marginRight: "10px" }}
+                                style={{ width: "20px", marginRight: "5px" }}
                               />
                               <p style={{ fontWeight: "700" }}>Number table </p>
                             </div>
@@ -223,7 +223,7 @@ const ReservationInfor = () => {
                             <div className={styles.imageProfile}>
                               <img
                                 src={people1}
-                                style={{ width: "20px", marginRight: "10px" }}
+                                style={{ width: "20px", marginRight: "5px" }}
                               />
                               <p style={{ fontWeight: "700" }}>Capacity</p>
                             </div>
@@ -282,7 +282,7 @@ const ReservationInfor = () => {
                             </div>
                           }
                         >
-                          {reservation.phone}
+                          0{reservation.phone}
                         </Descriptions.Item>
                       </Descriptions>
                       {/* Nếu như đã cancel thì cập nhật lại nút bấm */}
@@ -320,7 +320,7 @@ const ReservationInfor = () => {
                               reservation.createdAt.split("T")[0]
                             ).getTime()) /
                             3600000 >
-                            24 ? (
+                          24 ? (
                             <div
                               style={{
                                 marginTop: "20px",
@@ -363,14 +363,13 @@ const ReservationInfor = () => {
                                     )
                                   ) -
                                     Date.now() <
-                                    61 * 60 * 1000
+                                  61 * 60 * 1000
                                     ? true
                                     : false
                                 }
                               >
                                 Reject
                               </Button>
-
                             </div>
                           )}
                           <div

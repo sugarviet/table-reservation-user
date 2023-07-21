@@ -1,5 +1,5 @@
 import styles from "./HomeContent.module.css";
-import { Select, Form, DatePicker, Space, Button } from "antd";
+import { Select, Form, DatePicker, Space, Button, notification } from "antd";
 import Search from "../../../../assets/search.png";
 import HomeTable from "../HomeTable/HomeTable";
 import { onFinish } from "../../components/hooks/useSearchTable";
@@ -36,7 +36,10 @@ const HomeContent = () => {
       console.log(response.data.listTable);
       setIsLoading(false);
     } catch (error) {
-      console.error(error);
+      console.error(error.response.data.error.message);
+      notification.error({
+        message: error.response.data.error.message,
+      });
       setIsLoading(false);
     }
   };
