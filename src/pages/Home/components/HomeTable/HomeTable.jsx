@@ -24,7 +24,7 @@ const HomeTable = ({ data }) => {
         }}
       />
       <div className={styles.tableTitle}>
-        <h1>Find {data.length} table suit for your requirements</h1>
+        <h1 className={styles.tableFind}>Find {data.length} table suit for your requirements</h1>
         <p style={{ fontSize: "19px", paddingTop: "3px", color: "#F75A41" }}>
           * Note about reservation time
         </p>
@@ -41,7 +41,7 @@ const HomeTable = ({ data }) => {
         </p>
       </div>
       {data?.map((table, index) => (
-        <div className={styles.tableTable} key={index}>
+        <div className={styles.tableTable} key={index} data-aos="zoom-out">
           <img className={styles.imgTable} src={dish} />
           <h1 className={styles.textTable}>{table?.tableNumber}</h1>
           <div>
@@ -57,7 +57,7 @@ const HomeTable = ({ data }) => {
               onClick={() => handleChooseTable(table)}
               className={styles.tableTableBtn}
             >
-              <p style={{ fontSize: "20px" }}>Book</p>
+              <p className={styles.tableBook} style={{ fontSize: "20px" }}>Book</p>
             </Button>
           </div>
         </div>

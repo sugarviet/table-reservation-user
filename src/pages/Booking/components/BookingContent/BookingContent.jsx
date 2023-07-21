@@ -114,11 +114,7 @@ const BookingContent = () => {
           <div className={styles.bookingDetail}>
             <img style={{ width: "27px" }} src={address} alt="address" />
             <p
-              style={{
-                fontSize: "14px",
-                fontWeight: "500",
-                padding: "5px 0 0 7px",
-              }}
+              className={styles.bookingDetailTitle}
             >
               Yummy Pot
             </p>
@@ -127,11 +123,7 @@ const BookingContent = () => {
           <div className={styles.bookingDetail}>
             <img style={{ width: "25px" }} src={people} alt="people" />
             <p
-              style={{
-                fontSize: "14px",
-                fontWeight: "500",
-                padding: "5px 0 0 7px",
-              }}
+              className={styles.bookingDetailTitle}
             >
               Table for {selectedTable?.capacity} people
             </p>
@@ -139,11 +131,7 @@ const BookingContent = () => {
           <div className={styles.bookingDetail}>
             <img style={{ width: "25px" }} src={calendar} alt="calendar" />
             <p
-              style={{
-                fontSize: "14px",
-                fontWeight: "500",
-                padding: "5px 0 0 7px",
-              }}
+              className={styles.bookingDetailTitle}
             >
               {formattedDate}
             </p>
@@ -151,11 +139,7 @@ const BookingContent = () => {
           <div className={styles.bookingDetail}>
             <img style={{ width: "27px" }} src={dollar} alt="address" />
             <p
-              style={{
-                fontSize: "14px",
-                fontWeight: "500",
-                padding: "5px 0 0 7px",
-              }}
+              className={styles.bookingDetailTitle}
             >
               {selectedTable?.depositPrice.$numberDecimal}$
             </p>
@@ -198,7 +182,7 @@ const BookingContent = () => {
           <div className={styles.bookingDetail}>
             <Form.Item
               name="fullName"
-              label={<span style={{ color: "#BD8E2E" }}>Full Name</span>}
+              label={<span className={styles.bookingTitleUser}>Full Name</span>}
               rules={[
                 {
                   required: true,
@@ -215,7 +199,7 @@ const BookingContent = () => {
             </Form.Item>
             <Form.Item
               name="arrivalTime"
-              label={<span style={{ color: "#BD8E2E" }}>Arrival Time</span>}
+              label={<span className={styles.bookingTitleUser}>Arrival Time</span>}
               rules={[
                 {
                   message: "Please input your arrival time!",
@@ -234,7 +218,7 @@ const BookingContent = () => {
           <div>
             <Form.Item
               name="phone"
-              label={<span style={{ color: "#BD8E2E" }}>Phone Number</span>}
+              label={<span className={styles.bookingTitleUser}>Phone Number</span>}
               rules={[
                 {
                   required: true,
@@ -243,6 +227,7 @@ const BookingContent = () => {
               ]}
             >
               <Input
+              
                 addonBefore={prefixSelector}
                 style={{
                   width: "48%",

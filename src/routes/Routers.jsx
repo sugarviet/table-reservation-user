@@ -5,7 +5,10 @@ import SignUp from "../pages/SignUp";
 import Booking from "../pages/Booking";
 import Profile from "../pages/Profile";
 import Success from "../components/Success/Success";
+import OrderConfirm from "../components/OrderConfirm/OrderConfirm";
+
 const Routers = () => {
+
   return (
     <Routes>
       <Route path="/login" element={<SignIn />} />
@@ -14,6 +17,7 @@ const Routers = () => {
       <Route path="/booking" element={<Booking />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/success" element={<Success />} />
+      <Route path="/orderConfirm" element={<OrderConfirm />} />
     </Routes>
   );
 };

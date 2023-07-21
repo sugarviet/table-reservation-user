@@ -1,0 +1,161 @@
+.orderConfirm {
+    /* background-image: url('https://booking.pizza4ps.com/static/media/bg.38c61b45.jpg'); */
+    height: 100%;
+
+    min-height: 110vh;
+    /* background-color: #009cde; */
+}
+
+.userContent {
+    margin-left: 50px;
+}
+
+.shippingImg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.shippingContent {
+    height: 400px;
+    text-align: center;
+}
+
+.shippingContainer {
+    position: relative;
+    animation-name: slide-right ;
+    animation-duration: 3s;
+    animation-delay: -2s;
+    margin-top: 100px;
+    width: 650px;
+}
+.containerLeft{
+    position: relative;
+    animation-name: slide-left;
+    animation-duration: 3s;
+    animation-delay: -2s;
+}
+
+@keyframes slide-left {
+    75% {
+        right: 200px;
+        top: 0px;
+    }
+
+    100% {
+        right: 0px;
+        top: 0px;
+    }
+}
+
+@keyframes slide-right {
+    75% {
+        left: 200px;
+        top: 0px;
+    }
+
+    100% {
+        left: 0px;
+        top: 0px;
+    }
+}
+
+
+
+
+
+
+.bookingContent {
+    font-family: "Roboto", sans-serif;
+    background-color: #f4f2ef;
+    color: #DA3743;
+    border-radius: 0.5rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin: 1.25rem auto 0;
+    max-width: 900px;
+    padding: 10px 10px;
+    padding-top: 15px;
+}
+
+.bookingDetail {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
+    padding-right: 30px;
+}
+
+.bookingContent1 {
+    font-family: BrandonText, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    background-color: #f4f2ef;
+    color: #DA3743;
+    border-radius: 0.5rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin: 1.25rem auto 0;
+    max-width: 900px;
+    padding: 10px 10px;
+}
+
+/* .bookingDetailColumn{
+    display: flex;
+    flex-direction: column;
+} */
+
+.bookingBook {
+    font-weight: 700;
+    font-family: BrandonText, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    background-color: #DA3743;
+    width: 650px;
+}
+
+.bookingBook:hover {
+    background-color: #EF4949 !important;
+}
+
+.bookingBook1 {
+    width: 110px;
+    height: 40px;
+    background-color: #009cde;
+}
+
+.bookingBook1:hover {
+    background-color: #057cb0 !important;
+}
+
+.bookingDetailTitle {
+    color: #242E52;
+    font-weight: 600;
+    font-family: BrandonText, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-size: 14px;
+    padding: 5px 0 0 7px;
+}
+
+.bookingDetailConfirm {
+    color: #242E52;
+    font-weight: 700;
+    font-family: BrandonText, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+.bookingDetailConfirm1 {
+    color: #242E52;
+    font-weight: 500;
+    font-family: BrandonText, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-size: 14px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.bookingTitleUser {
+    color: #DA3743;
+    font-weight: 700;
+    font-family: BrandonText, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}

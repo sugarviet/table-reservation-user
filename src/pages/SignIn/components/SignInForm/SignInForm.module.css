@@ -19,6 +19,9 @@
 }
 
 .formButton {
+  font-weight: 700;
+    font-family: BrandonText, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  background-color: #DA3743;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
@@ -31,4 +34,8 @@
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
+}
+.formButton:hover{
+  background-color: #EF4949;
+  color: #ffffff;
 }

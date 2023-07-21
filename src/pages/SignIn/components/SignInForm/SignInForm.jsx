@@ -87,7 +87,7 @@ const SignInForm = () => {
                 <Col span={24}>
                   <Form.Item>
                     <Form.Item name="remember" valuePropName="checked" noStyle>
-                      <Checkbox>Remember me</Checkbox>
+                      <Checkbox >Remember me</Checkbox>
                     </Form.Item>
                   </Form.Item>
                 </Col>
@@ -95,7 +95,6 @@ const SignInForm = () => {
 
               <Form.Item>
                 <Button
-                  type="primary"
                   htmlType="submit"
                   className={style.formButton}
                 >
@@ -115,6 +114,22 @@ const SignInForm = () => {
           </Card>
         </div>
       </Col>
+      <style>
+        {`
+        :where(.css-dev-only-do-not-override-lbcgob) .ant-btn-default:not(:disabled):hover {
+          color: #ffffff;
+        }
+        .ant-checkbox-checked .ant-checkbox-inner {
+          background-color: #EF4949 !important;
+          border-color: #EF4949 !important; 
+        }
+        
+        .ant-checkbox-inner {
+          background-color: #f0f0f0 !important; 
+          border-color: #d9d9d9 !important;
+        }
+        `}
+      </style>
     </Row>
   );
 };

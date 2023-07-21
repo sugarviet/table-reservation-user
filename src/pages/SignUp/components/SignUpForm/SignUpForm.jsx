@@ -216,25 +216,8 @@ const SignUpForm = () => {
                   onChange={(e) => setFullName(e.target.value)}
                 />
               </Form.Item>
-              {/* <Form.Item
-                name="agreement"
-                valuePropName="checked"
-                rules={[
-                  {
-                    validator: (_, value) =>
-                      value
-                        ? Promise.resolve()
-                        : Promise.reject(new Error("Should accept agreement")),
-                  },
-                ]}
-                {...tailFormItemLayout}
-              >
-                <Checkbox>
-                  I have read the <a href="">agreement</a>
-                </Checkbox>
-              </Form.Item> */}
-              <Form.Item className={style.formButton} {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit" className={style.formButton}>
+              <Form.Item  {...tailFormItemLayout}>
+                <Button  htmlType="submit" className={style.formButton}>
                   Register
                 </Button>
               </Form.Item>
@@ -246,6 +229,22 @@ const SignUpForm = () => {
           </Card>
         </div>
       </Col>
+        <style>
+        {`
+        :where(.css-dev-only-do-not-override-lbcgob) .ant-btn-default:not(:disabled):hover {
+          color: #ffffff;
+        }
+        .ant-checkbox-checked .ant-checkbox-inner {
+          background-color: #EF4949 !important;
+          border-color: #EF4949 !important; 
+        }
+        
+        .ant-checkbox-inner {
+          background-color: #f0f0f0 !important; 
+          border-color: #d9d9d9 !important;
+        }
+        `}
+      </style>
     </Row>
   );
 };
