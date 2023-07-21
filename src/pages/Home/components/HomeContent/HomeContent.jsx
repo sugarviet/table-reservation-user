@@ -160,7 +160,11 @@ const HomeContent = () => {
       <style>
         {`
         :where(.css-dev-only-do-not-override-lbcgob).ant-select .ant-select-selection-placeholder {
-          color: #333333;
+          color: #000000;
+        }
+        :where(.css-dev-only-do-not-override-lbcgob).ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled){
+          color: #ffffff;
+          background-color: #FF6571
         }
         `}
       </style>

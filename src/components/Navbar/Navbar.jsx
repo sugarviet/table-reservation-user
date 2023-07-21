@@ -85,7 +85,7 @@ const Navbar = () => {
                   </Dropdown>
                 ) : (
                   <Link to={"/login"}>
-                    <Button>Login</Button>
+                    <Button ><p className={styles.loginBtn} >Login</p></Button>
                   </Link>
                 )}
               </li>
@@ -116,6 +116,15 @@ const Navbar = () => {
 
       {/* Show menu when on mobile's screen */}
       <Drawer isDrawerVisible={isDrawerVisible} hideDrawer={hideDrawer} />
+      <style>
+        {`
+        :where(.css-dev-only-do-not-override-lbcgob) .ant-btn-default:not(:disabled):hover {
+         
+          color: #DA3743;
+          */
+        }
+        `}
+      </style>
     </Layout>
   );
 };

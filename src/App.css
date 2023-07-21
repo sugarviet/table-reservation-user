@@ -1,8 +1,78 @@
 :root {
-  --primary-green-color: #BD8E2E;
+  --primary-green-color: #EF4949;
   --primary-orange-color: #f65005;
   --header-height: 64px;
 }
+/* Font Family Definitions */
+@font-face {
+  font-family: 'BrandonText';
+  src: url('/path/to/BrandonText.woff2') format('woff2'),
+       url('/path/to/BrandonText.woff') format('woff');
+  /* Add more font formats if necessary for cross-browser compatibility */
+}
+
+/* For macOS/iOS devices */
+@font-face {
+  font-family: '-apple-system';
+  font-weight: normal;
+  font-style: normal;
+  src: local('.SFNSText-Regular'), local('.HelveticaNeueDeskInterface-Regular'),
+       local('.LucidaGrandeUI'), local('Arial');
+}
+
+/* For macOS devices */
+@font-face {
+  font-family: 'BlinkMacSystemFont';
+  font-weight: normal;
+  font-style: normal;
+  src: local('Helvetica Neue');
+}
+
+/* For Windows devices */
+@font-face {
+  font-family: 'Segoe UI';
+  font-weight: normal;
+  font-style: normal;
+  src: local('Segoe UI'), local('Segoe WP'), local('Segoe UI Emoji');
+}
+
+/* For Android devices */
+@font-face {
+  font-family: 'Roboto';
+  font-weight: normal;
+  font-style: normal;
+  src: local('Roboto'), url('/path/to/Roboto.woff2') format('woff2'),
+       url('/path/to/Roboto.woff') format('woff');
+  /* Add more font formats if necessary for cross-browser compatibility */
+}
+
+/* For general fallback */
+body {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+/* Emoji Fonts */
+@font-face {
+  font-family: 'Apple Color Emoji';
+  src: local('Apple Color Emoji'), url('/path/to/AppleColorEmoji.woff2') format('woff2'),
+       url('/path/to/AppleColorEmoji.woff') format('woff');
+  /* Add more font formats if necessary for cross-browser compatibility */
+}
+
+@font-face {
+  font-family: 'Segoe UI Emoji';
+  src: local('Segoe UI Emoji'), url('/path/to/SegoeUIEmoji.woff2') format('woff2'),
+       url('/path/to/SegoeUIEmoji.woff') format('woff');
+  /* Add more font formats if necessary for cross-browser compatibility */
+}
+
+@font-face {
+  font-family: 'Segoe UI Symbol';
+  src: local('Segoe UI Symbol'), url('/path/to/SegoeUISymbol.woff2') format('woff2'),
+       url('/path/to/SegoeUISymbol.woff') format('woff');
+  /* Add more font formats if necessary for cross-browser compatibility */
+}
+
 
 
 /* #root {

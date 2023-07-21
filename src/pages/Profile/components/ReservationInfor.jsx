@@ -1,6 +1,6 @@
 import styles from "./ReservationInfor.module.css";
 import { HomeOutlined, UserOutlined } from "@ant-design/icons";
-import { Breadcrumb, Row, Col, Descriptions, Button } from "antd";
+import { Breadcrumb, Row, Col, Descriptions, Button, Modal } from "antd";
 import user from "../../../assets/user.png";
 import history from "../../../assets/file.png";
 import table1 from "../../../assets/table1.png";
@@ -8,6 +8,8 @@ import pin1 from "../../../assets/pin1.png";
 import people1 from "../../../assets/people1.png";
 import dollar1 from "../../../assets/dollar1.png";
 import calendar1 from "../../../assets/calendar1.png";
+import user1 from "../../../assets/user-profile1.png";
+import phone1 from "../../../assets/phone1.png";
 
 import logout from "../../../assets/logout.png";
 import { useState, useEffect } from "react";
@@ -24,24 +26,40 @@ const ReservationInfor = () => {
   let decodedToken = null;
   const navigate = useNavigate();
   const { mutate: cancelReservation } = useCancelReservation();
+
+  const [userData, setUserData] = useState();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
   useEffect(() => {
     let decodedToken = null;
     if (localStorage.getItem("token") != null) {
       decodedToken = jwtDecode(localStorage.getItem("token"));
+      setUserData(decodedToken);
     } else {
       navigate("/login");
     }
   }, [navigate]);
+
   const handleCancelReservation = (reservation) => {
     cancelReservation({
       reservationId: reservation._id,
     });
+    setIsModalOpen(false);
   };
   const handleActive = (id) => {
     setActive(id);
     if (id == 2) {
       mutate();
     }
+  };
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
   };
   return (
     <div style={{ paddingTop: "100px" }}>
@@ -94,7 +112,7 @@ const ReservationInfor = () => {
                         paddingTop: "5px",
                       }}
                     >
-                      {decodedToken?.fullName}
+                      {userData?.fullName}
                     </h1>
                   </div>
                   <div
@@ -161,7 +179,7 @@ const ReservationInfor = () => {
                       src={history}
                       style={{ width: "35px", marginRight: "10px" }}
                     />
-                    <h1>{decodedToken?.fullName}</h1>
+                    <h1>All reservation</h1>
                   </div>
                   {data?.map((reservation) => (
                     <div>
@@ -243,7 +261,7 @@ const ReservationInfor = () => {
                           label={
                             <div className={styles.imageProfile}>
                               <img
-                                src={table1}
+                                src={user1}
                                 style={{ width: "20px", marginRight: "10px" }}
                               />
                               <p style={{ fontWeight: "700" }}>FullName </p>
@@ -256,7 +274,7 @@ const ReservationInfor = () => {
                           label={
                             <div className={styles.imageProfile}>
                               <img
-                                src={table1}
+                                src={phone1}
                                 style={{ width: "20px", marginRight: "10px" }}
                               />
                               <p style={{ fontWeight: "700" }}>Phone </p>
@@ -271,6 +289,7 @@ const ReservationInfor = () => {
                         <div>
                           <p
                             style={{
+                              paddingTop: "10px",
                               marginBottom: "30px",
                               display: "flex",
                               justifyContent: "flex-end",
@@ -281,6 +300,7 @@ const ReservationInfor = () => {
                           >
                             <p
                               style={{
+                                color: "black",
                                 fontWeight: "500",
                                 display: "block",
                                 paddingRight: "5px",
@@ -290,6 +310,7 @@ const ReservationInfor = () => {
                             </p>
                             Your Reservation Has Been Canceled.
                           </p>
+                          <hr />
                         </div>
                       ) : (
                         <div>
@@ -298,7 +319,7 @@ const ReservationInfor = () => {
                               reservation.createdAt.split("T")[0]
                             ).getTime()) /
                             3600000 >
-                          24 ? (
+                            24 ? (
                             <div
                               style={{
                                 marginTop: "20px",
@@ -328,14 +349,8 @@ const ReservationInfor = () => {
                             >
                               <Button
                                 key="approve"
-                                type="primary"
-                                style={{
-                                  background: "rgb(221,214,197)",
-                                  color: "black",
-                                }}
-                                onClick={() =>
-                                  handleCancelReservation(reservation)
-                                }
+                                className={styles.buttonReject}
+                                onClick={showModal}
                                 disabled={
                                   new Date().setHours(
                                     Number(
@@ -345,13 +360,22 @@ const ReservationInfor = () => {
                                     )
                                   ) -
                                     Date.now() <
-                                  61 * 60 * 1000
+                                    61 * 60 * 1000
                                     ? true
                                     : false
                                 }
                               >
                                 Reject
                               </Button>
+                              <Modal 
+                              title="Cancel Confirmation" 
+                              open={isModalOpen} 
+                              onOk={() => handleCancelReservation(reservation)}  
+                              onCancel={handleCancel}
+                              centered
+                              >
+                                <p>Are you sure you want to cancel this reservation?</p>
+                              </Modal>
                             </div>
                           )}
                           <div
@@ -387,6 +411,7 @@ const ReservationInfor = () => {
                               </p>
                             </div>
                           </div>
+                          <hr />
                         </div>
                       )}
                     </div>
@@ -397,6 +422,13 @@ const ReservationInfor = () => {
           </Row>
         </Col>
       </Row>
+      <style>
+        {`
+        :where(.css-dev-only-do-not-override-lbcgob) .ant-btn-default:not(:disabled):hover {
+          color: #ffffff;
+        }
+        `}
+      </style>
     </div>
   );
 };

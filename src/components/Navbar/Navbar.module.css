@@ -38,6 +38,13 @@
   display: none;
 }
 
+.loginBtn{
+  font-family: BrandonText, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-weight: 700;
+}
+.loginBtn:hover{
+  color: #DA3743;
+}
 /* .navbarSearchBar{
     display: flex;
     justify-content: space-between;
@@ -53,7 +60,7 @@
 }
 
 .whiteText:hover {
-  color: #48d41d;
+  color: #DA3743;
 }
 
 .navbarSearchBar {
