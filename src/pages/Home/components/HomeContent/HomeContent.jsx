@@ -117,13 +117,13 @@ const HomeContent = () => {
                       <Option
                         key={option.value}
                         value={option.value}
-                        // disabled={
-                        //   new Date().setHours(
-                        //     Number(option.label.split(":")[0])
-                        //   ) -
-                        //     Date.now() <
-                        //   15 * 60 * 1000
-                        // }
+                        disabled={
+                          new Date().setHours(
+                            Number(option.label.split(":")[0])
+                          ) -
+                            Date.now() <
+                          15 * 60 * 1000
+                        }
                       >
                         {option.label}
                       </Option>
@@ -136,9 +136,9 @@ const HomeContent = () => {
             <Button
               className={styles.homeBtn}
               htmlType="submit"
-              // disabled={
-              //   new Date().setHours(Number(16)) - Date.now() < 14 * 60 * 1000
-              // }
+              disabled={
+                new Date().setHours(Number(16)) - Date.now() < 14 * 60 * 1000
+              }
             >
               <div className={styles.homeChoose1}>
                 <img style={{ width: "30px" }} src={Search}></img>
