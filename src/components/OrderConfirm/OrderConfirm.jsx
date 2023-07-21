@@ -123,7 +123,7 @@ function OrderConfirm() {
                         Number table
                       </p>
                       <p className={styles.bookingDetailConfirm1}>
-                        Table {userData.tables[0].table.tableNumber}
+                        Table {userData?.tables[0]?.table?.tableNumber}
                       </p>
                     </div>
                   </div>
@@ -143,20 +143,6 @@ function OrderConfirm() {
                   </Space>
                 </div>
               </div>
-              {/* <div className={styles.userContent}>
-                                <h1 style={{ paddingTop: "100px" }}>Order Successfully</h1>
-                                {userData ? (
-                                    <div>
-                                        <h2>Order detail:</h2>
-                                        <p>Họ và tên: {userData.fullName}</p>
-                                        <p>Số điện thoại: {userData.phone}</p>
-                                        <p>Số điện thoại: {userData.arrivalTime}</p>
-                                        <p>Số điện thoại: {userData.depositAmount.$numberDecimal}</p>
-                                    </div>
-                                ) : (
-                                    <p>Đang tải dữ liệu...</p>
-                                )}
-                            </div> */}
             </Col>
             <Col span={8}>
               <div className={styles.shippingContainer}>
