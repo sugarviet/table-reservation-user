@@ -29,7 +29,7 @@ const ReservationInfor = () => {
 
   const [userData, setUserData] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [id, setID] = useState();
 
   useEffect(() => {
     let decodedToken = null;
@@ -41,9 +41,9 @@ const ReservationInfor = () => {
     }
   }, [navigate]);
 
-  const handleCancelReservation = (reservation) => {
+  const handleCancelReservation = () => {
     cancelReservation({
-      reservationId: reservation._id,
+      reservationId: id,
     });
     setIsModalOpen(false);
   };
@@ -54,7 +54,8 @@ const ReservationInfor = () => {
     }
   };
 
-  const showModal = () => {
+  const showModal = (event, id) => {
+    setID(id);
     setIsModalOpen(true);
   };
 
@@ -350,7 +351,9 @@ const ReservationInfor = () => {
                               <Button
                                 key="approve"
                                 className={styles.buttonReject}
-                                onClick={showModal}
+                                onClick={(event) =>
+                                  showModal(event, reservation._id)
+                                }
                                 disabled={
                                   new Date().setHours(
                                     Number(
@@ -367,15 +370,7 @@ const ReservationInfor = () => {
                               >
                                 Reject
                               </Button>
-                              <Modal 
-                              title="Cancel Confirmation" 
-                              open={isModalOpen} 
-                              onOk={() => handleCancelReservation(reservation)}  
-                              onCancel={handleCancel}
-                              centered
-                              >
-                                <p>Are you sure you want to cancel this reservation?</p>
-                              </Modal>
+
                             </div>
                           )}
                           <div
@@ -422,6 +417,15 @@ const ReservationInfor = () => {
           </Row>
         </Col>
       </Row>
+      <Modal
+        title="Cancel Confirmation"
+        open={isModalOpen}
+        onOk={handleCancelReservation}
+        onCancel={handleCancel}
+        centered
+      >
+        <p>Are you sure you want to cancel this reservation?</p>
+      </Modal>
       <style>
         {`
         :where(.css-dev-only-do-not-override-lbcgob) .ant-btn-default:not(:disabled):hover {
